@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDE & Config
+.vscode/
+.idea/
+.config/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+.cache/
+
+# Sensitive
+*.key
+*.pem
+credentials.json
+tokens.json
+gcp-oauth.keys.json
+
+# Node
+node_modules/
+npm-debug.log
+
+# Environment
+.env
+.env.local
+
+# Claude local settings (keep only tracked config)
+.claude/settings.local.json
+.claude/projects/
