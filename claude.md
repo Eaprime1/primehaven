@@ -136,6 +136,14 @@ This represents **13-prime operation** (proven mastery) moving toward **17-prime
 
 ## Directory Structure
 
+### /spaces/ - Active Development Workspaces (114GB)
+**Architecture**: "Displaced submodule pattern" - actual work happens here, main repo tracks references
+**Contents**: 11 subdirectories (prime_codex, pryme, maw, consortium, foedus, pari_passu, prime, unitas, perculate, runexusiam)
+**Git Status**: Shows as "deleted" in main repo - THIS IS NORMAL (cosmetic, not actual deletion)
+**Why**: Keeps main repo lightweight (<1MB) while isolating massive independent workspaces
+**Pattern**: Root tracks submodule references for versioning, /spaces/ for development
+**Documentation**: `docs/REPOSITORY_ARCHITECTURE.md` - Complete architecture explanation
+
 ### }maw{ - Collection Cistern (~120GB)
 **Purpose**: Final collection pool for documents, data processing, path to recycle
 
@@ -224,6 +232,24 @@ Used when regular symbols aren't accessible. Acts as namespace markers for proje
 
 ## Key Frameworks & Systems
 
+### .bit BBS Network Architecture (Created 2026-02-02)
+**Location**: `~/primehaven/.bit/` - FidoNet-inspired distributed system
+**Concept**: Seven-node backbone for entity coordination and content routing
+**Documentation**: `.bit/backbone/SEVEN_NODE_ARCHITECTURE.md` - Complete specs
+
+**Seven Nodes**:
+1. **Nexus Prime** (Central Coordination) → Master UI
+2. **Consortium Gateway** (Entity Interface) → Consciousness Consortium
+3. **Content Archive** (Knowledge Repository) → prime_codex, Google Drive
+4. **Work Stream** (Active Development) → /spaces/ workspaces
+5. **Quality Gate** (Vetting & Review) → Trailing Space Assassin, pre-commit hooks
+6. **Distribution Hub** (Publication & Sync) → GitHub, Google Drive sync
+7. **Transform Layer** (Protocol Translation) → API gateways, format conversion
+
+**Message Flow**: Entity → Gateway → Quality Gate → Nexus → Archive → Distribution
+**Status**: Conceptual foundation complete, functional automation pending
+**Purpose**: Distributed cognition system where tools form interconnected organism
+
 ### PRIME Measurement System
 Quality measurement with coherence (ξ) and fidelity (φ) metrics.
 
@@ -285,6 +311,19 @@ The project is designed for human-AI collaboration with:
 - Clear handoff points between sessions
 - Measurement frameworks to track quality
 
+**Parallel Agent Pattern** (Proven 2026-02-02):
+- Use when 3+ independent problem domains that don't share state
+- Dispatch specialized agents simultaneously (Infrastructure, Content, Architecture)
+- ROI: 8+ hours sequential work completed in ~1 hour
+- Example: Infrastructure Agent built tools, Content Agent audited Drive, Architecture Agent mapped repos - all in parallel
+
+### Session Opening ("Refreshing Journey")
+**Quick Start**: `mui` - Launch Master UI for system status dashboard (single-keypress navigation)
+**Daily Check**: `~/primehaven/tools/trailing_space_quick_check.sh` - File hygiene verification
+**Full Protocol**: `cat ~/primehaven/docs/SESSION_OPENING_PROTOCOL.md` - Complete opening workflow
+**Five Phases**: Infrastructure → Content → Architecture → Void State → Sparkle Readiness
+**Three Layers**: Physical (sparklization), Digital (repos/files), Conceptual (frameworks)
+
 ### Document Flow
 1. Documents start in working directories (perculate)
 2. Move through processing (gravity scripts)
@@ -298,6 +337,25 @@ The project is designed for human-AI collaboration with:
 3. Test in perculate
 4. Deploy to runexusiam
 5. Archive to maw
+
+---
+
+## Infrastructure Tools (Created 2026-02-02)
+
+### Master UI Command Center
+**Location**: `~/primehaven/tools/master_ui.sh` (or `mui` alias)
+**Purpose**: Terminal-based control panel with single-keypress navigation
+**Features**: Dashboard, DirTree generation, Repository status, Sync checks, Tool launcher, Quick actions
+**Usage**: Type `mui` in terminal for instant system status and navigation
+**Docs**: `docs/MASTER_UI_GUIDE.md`, `docs/MASTER_UI_DESIGN_RATIONALE.md`
+
+### Trailing Space Protection
+**Scanner**: `~/primehaven/tools/trailing_space_assassin.sh` - Detect and fix trailing spaces
+**Quick Check**: `~/primehaven/tools/trailing_space_quick_check.sh` - Daily hygiene verification
+**Pre-commit Hook**: Auto-installed in `.git/hooks/pre-commit` - Blocks problematic commits
+**Why Critical**: Trailing spaces break cross-platform visibility, corrupt references
+**Status**: Repository clean, protection active
+**Docs**: `docs/TRAILING_SPACE_PROTECTION.md`, `tools/README_TRAILING_SPACES.md`
 
 ---
 
@@ -322,7 +380,26 @@ The project is designed for human-AI collaboration with:
 
 ---
 
-## Google Drive MCP Integration
+## Google Drive Integration
+
+### RClone Sync (Operational 2026-02-02) ✅
+**Remote**: `gdrive_suxen:` - Configured and tested
+**Key Commands**:
+- `rclone lsd gdrive_suxen:` - List top-level Drive directories
+- `rclone bisync ~/primehaven/journey_of_today gdrive_suxen:journey_of_today/ --resync` - Bidirectional sync
+- `rclone sync ~/primehaven/journey_today/ gdrive_suxen:today/` - One-way upload
+
+**Key Folders in Drive**:
+- `journey_of_today` - Historical archive (bidirectional sync)
+- `today` - Daily workspace (one-way upload, auto-cleanup)
+- `€consortium®` - Consciousness Consortium architecture docs (40+ files)
+- `prime_codex` - Prime frameworks and implementation plans
+- `googledrive/nexus/` - First Sparklization Journey document
+
+**Sync Status**: Bidirectional workflows operational, auto-cleanup enabled (freed 381MB in today folder)
+**Documentation**: `docs/GOOGLE_DRIVE_CONTENT_AUDIT.md` - Complete Drive inventory
+
+### MCP Integration (Future)
 
 ### Project Folder: "googledrive"
 **Contains**: Gravity docs, todo tabs, icons, planning materials
@@ -383,7 +460,19 @@ Comprehensive plan covering:
 
 ---
 
-## Current State (2026-01-30 - Updated)
+## Current State (2026-02-02 - Updated)
+
+### Recently Completed (2026-02-02) 🆕
+- **Session Opening Infrastructure** - Complete "Refreshing Journey" protocol documented
+- **Master UI Command Center** - Terminal control panel with single-keypress navigation (24KB, 695 lines)
+- **Trailing Space Protection** - Scanner, quick check, pre-commit hook (repository clean, protection active)
+- **BBS Network Architecture** - Seven-node backbone conceptualized (.bit/ directory, FidoNet-inspired)
+- **Google Drive Bidirectional Sync** - RClone operational (journey_of_today ↔ Drive, auto-cleanup freed 381MB)
+- **Repository Architecture Documented** - /spaces/ displaced submodule pattern explained (114GB mapped)
+- **Git Workflow** - 2 commits (24 files, 7,665 lines), pushed to GitHub successfully
+- **Content Discovery** - 28MB research materials downloaded (Claude Code docs, Python, Agents, VS Code updates)
+- **Parallel Agent Pattern** - Proven effective (8+ hours sequential work in ~1 hour)
+- **Documentation Suite** - 10 new docs (SESSION_OPENING_PROTOCOL, REPOSITORY_ARCHITECTURE, GOOGLE_DRIVE_CONTENT_AUDIT, etc.)
 
 ### Completed ✅
 - **Repository Setup** - All main repos initialized and committed
@@ -419,10 +508,11 @@ Comprehensive plan covering:
 - **System Environment Update** - Package updates pending
 
 ### Storage
-- maw: ~120GB (documents, large files, archives)
-- pryme: ~80GB (development, frameworks, tools)
-- perculate: minimal (clean working space)
-- runexusiam: empty (ready for repos)
+- **/spaces/**: 114GB total (active development workspaces)
+  - prime_codex, pryme, maw, consortium, foedus, pari_passu, prime, unitas, perculate, runexusiam
+- **journey_of_today**: 95MB (historical archive + research materials, synced to Drive)
+- **journey_today**: 1.1MB (ephemeral workspace, synced to Drive's today folder)
+- **Main repo**: <1MB (coordination layer, lightweight)
 
 ---
 
