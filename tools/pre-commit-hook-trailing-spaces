@@ -1,0 +1,73 @@
+#!/bin/bash
+
+################################################################################
+# PRE-COMMIT HOOK: Trailing Space Detection
+# 
+# This hook prevents commits of files/folders with trailing spaces
+# Install: ln -s ../../tools/pre-commit-hook-trailing-spaces .git/hooks/pre-commit
+################################################################################
+
+# Colors
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+# Get the repository root
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+# Check staged files for trailing spaces in their names
+has_trailing_spaces=0
+
+# Get list of staged files (including renames and new files)
+while IFS= read -r -d '' file; do
+    # Get just the basename
+    basename="${file##*/}"
+    
+    # Check if basename ends with space
+    if [[ "$basename" =~ [[:space:]]$ ]]; then
+        if [[ $has_trailing_spaces -eq 0 ]]; then
+            echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+            echo -e "${RED}✗ COMMIT BLOCKED: Trailing spaces detected in filenames${NC}"
+            echo -e "${RED}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+            echo ""
+            echo "The following staged files have trailing spaces in their names:"
+            echo ""
+        fi
+        
+        has_trailing_spaces=1
+        
+        # Show the problematic file
+        echo -e "${RED}  ✗${NC} $file"
+        
+        # Visual indicator of trailing spaces
+        visual="${basename//[[:space:]]$/}"
+        spaces="${basename#$visual}"
+        space_count="${#spaces}"
+        echo -e "    Name: '${basename}'"
+        echo -e "    Trailing: ${RED}${space_count} space(s)${NC}"
+        echo ""
+    fi
+done < <(git diff --cached --name-only --diff-filter=ACR -z)
+
+if [[ $has_trailing_spaces -eq 1 ]]; then
+    echo -e "${YELLOW}WHY THIS MATTERS:${NC}"
+    echo "  Trailing spaces in filenames cause MASSIVE silent corruption:"
+    echo "  - Files become invisible on some systems"
+    echo "  - Cross-platform compatibility breaks"
+    echo "  - Git references fail silently"
+    echo ""
+    echo -e "${YELLOW}TO FIX:${NC}"
+    echo "  1. Run: ./tools/trailing_space_assassin.sh"
+    echo "  2. Review and fix the trailing spaces"
+    echo "  3. Stage the corrected files"
+    echo "  4. Retry your commit"
+    echo ""
+    echo -e "${YELLOW}TO BYPASS (NOT RECOMMENDED):${NC}"
+    echo "  git commit --no-verify"
+    echo ""
+    
+    exit 1
+fi
+
+# All clear
+exit 0
