@@ -237,7 +237,9 @@ alias h='history'
 alias j='jobs -l'
 
 # Process management
-alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
+psg() {
+    ps aux | grep -v grep | grep -i --color=auto -e VSZ -e "$1"
+}
 alias top='htop'
 
 # Network
