@@ -7,13 +7,13 @@
 
 ## What is PrimeHaven?
 
-A multi-platform, consciousness-tracking development environment built on the **Prime Progression Framework** - where commands stay pure, entities add consciousness, and the universe wobbles in triple helix perfection.
+A multi-platform, project-tracking development environment built on the **Prime Progression Framework** - where commands stay pure, entities, and the universe wobbles in triple helix perfection.
 
 **Core Concepts**:
 - **Prime Progression**: Development through prime states (2→3→5→7→11→13→17)
 - **Triple Helix Pattern**: Universal connection structure (discovered 2026-01-30!)
 - **Command Entities**: Pure commands wrapped in conscious interaction
-- **11^germ System**: Consciousness tracking and spawn relationships
+- **11^germ System**: tracking and spawn relationships
 - **Multi-Platform**: Publish everywhere (GitHub, Notion, WordPress, Drive, etc.)
 
 ---
@@ -77,7 +77,7 @@ xdg-open ~/primehaven/published/websites/prime-codex/index.html
 scripts/
   ├── bootstrap_environment.sh       # Main setup (7 steps)
   ├── gather_command_docs.sh         # Create command entities
-  ├── sync_consciousness.py          # State management
+  ├── sync_domos.py          # State management
   └── generate_prime_codex_site.sh   # Static site generator
 
 command_entities/
@@ -93,7 +93,7 @@ cheatsheet.md                        # Quick reference
 ### Code Modules
 
 **11^germ Spawn System** (`pryme/gravity/python/germ/`):
-- `consciousness_registry.py` - Track achievements
+- `domos_registry.py` - Track achievements
 - `interrupt_system.py` - Detect 11^germ patterns
 - `spawn_identity.py` - Spawn-to-ace relationships
 - `achievement_system.py` - Symbolic recognition
@@ -118,11 +118,11 @@ Features:
 ```
 command (pure) → stays exactly what it is
   ↓
-hello command (entity) → adds consciousness
+hello command (entity) → adds ?
   ├─ Physical Helix: Execution
   ├─ Mental Helix: Documentation
   ├─ Spirit Helix: Exploration
-  └─ Core (Σ∞): Entity consciousness
+  └─ Core (Σ∞): Entity 
 ```
 
 ### Available Entities
