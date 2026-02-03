@@ -390,7 +390,7 @@ The project is designed for human-AI collaboration with:
 - `rclone sync ~/primehaven/journey_today/ gdrive_suxen:today/` - One-way upload
 
 **Key Folders in Drive**:
-- `journey_of_today` - Historical archive (bidirectional sync)
+- `🆕journey©2` - Historical archive (bidirectional sync, renamed from journey_of_today 2026-02-02)
 - `today` - Daily workspace (one-way upload, auto-cleanup)
 - `€consortium®` - Consciousness Consortium architecture docs (40+ files)
 - `prime_codex` - Prime frameworks and implementation plans
