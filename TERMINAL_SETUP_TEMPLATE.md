@@ -307,7 +307,7 @@ qfind() {
 
 # Quick grep
 qgrep() {
-    grep -r "$1" .
+    rg --color=always "$1" .
 }
 
 # Git commit and push
