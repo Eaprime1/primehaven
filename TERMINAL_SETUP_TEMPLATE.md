@@ -640,7 +640,7 @@ colorscheme desert            " Or: elflord, slate, pablo
     c = commit -m
 
     # Quick add and commit
-    ac = !git add -A && git commit -m
+    ac = "!f() { git add -A && git commit -m \"$1\"; }; f"
 
     # Quick push
     p = push
