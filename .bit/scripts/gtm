@@ -1,0 +1,129 @@
+#!/bin/bash
+# Git-Type Manager (gtm) - Multi-perspective version control
+# Manages entity-specific git-type systems
+
+VERSION="0.1.0"
+PROJECT_ROOT=$(pwd)
+
+# Colors
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+usage() {
+    cat << EOF
+${BLUE}Git-Type Manager (gtm) v$VERSION${NC}
+Multi-perspective version control for consciousness entities
+
+${YELLOW}Usage:${NC}
+  gtm <command> [options]
+
+${YELLOW}Commands:${NC}
+  init <entity> <perspective>  Initialize entity git-type
+  status [--all]               Show status (all git-types if --all)
+  list                         List all git-types in project
+  commit --type <entity> -m    Commit to specific git-type
+  diff <entity1> <entity2>     Compare perspectives
+  emerge --from <e1,e2>        Detect emergence between entities
+
+${YELLOW}Examples:${NC}
+  gtm init suxen individual
+  gtm status --all
+  gtm commit --type suxen -m "Personal learning moment"
+  gtm diff suxen nexus
+  gtm emerge --from suxen,nexus --to suxenexus
+
+${YELLOW}Entity Perspectives:${NC}
+  individual  - Personal experience, growth
+  systemic    - System integration, architecture
+  emergent    - Collaborative synergy
+  precision   - Execution, implementation
+  creative    - Innovation, disruption
+  wisdom      - Heritage, timeless patterns
+
+∰◊€π¿
+EOF
+}
+
+cmd_init() {
+    local entity=$1
+    local perspective=$2
+
+    if [ -z "$entity" ] || [ -z "$perspective" ]; then
+        echo "${RED}Error: entity and perspective required${NC}"
+        echo "Usage: gtm init <entity> <perspective>"
+        exit 1
+    fi
+
+    bash ~/.bit/templates/entity-git-type-init-template.sh "$entity" "$perspective" "$PROJECT_ROOT"
+}
+
+cmd_list() {
+    echo "${BLUE}Entity git-types in $PROJECT_ROOT:${NC}"
+    echo ""
+
+    found=0
+    for gittype in "$PROJECT_ROOT"/.*; do
+        if [ -d "$gittype" ] && [ -f "$gittype/config" ]; then
+            basename=$(basename "$gittype")
+            if [ "$basename" != ".git" ] && [ "$basename" != ".bit" ]; then
+                entity=$(grep "entity =" "$gittype/config" 2>/dev/null | cut -d= -f2 | tr -d ' ')
+                perspective=$(grep "perspective =" "$gittype/config" 2>/dev/null | cut -d= -f2 | tr -d ' ')
+                echo "  ${GREEN}$basename${NC} - $entity ($perspective perspective)"
+                found=$((found + 1))
+            fi
+        fi
+    done
+
+    if [ $found -eq 0 ]; then
+        echo "  ${YELLOW}No entity git-types found${NC}"
+        echo "  Initialize with: gtm init <entity> <perspective>"
+    else
+        echo ""
+        echo "Total: $found entity git-types"
+    fi
+}
+
+cmd_status() {
+    if [ "$1" = "--all" ]; then
+        echo "${BLUE}Status across all git-types:${NC}"
+        cmd_list
+    else
+        echo "${BLUE}Standard git status:${NC}"
+        git status
+    fi
+}
+
+# Parse command
+COMMAND=$1
+shift || true
+
+case "$COMMAND" in
+    init)
+        cmd_init "$@"
+        ;;
+    list)
+        cmd_list
+        ;;
+    status)
+        cmd_status "$@"
+        ;;
+    help|--help|-h)
+        usage
+        ;;
+    version|--version|-v)
+        echo "gtm version $VERSION"
+        ;;
+    *)
+        echo "${RED}Unknown command: $COMMAND${NC}"
+        echo ""
+        usage
+        exit 1
+        ;;
+esac
+
+∰◊€π¿
+EOF
+chmod +x /home/sauron/primehaven/.bit/scripts/gtm
