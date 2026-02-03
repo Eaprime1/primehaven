@@ -1,0 +1,223 @@
+#!/usr/bin/env python3
+"""
+Framework Extractor - Automated Triadic Pattern Extraction
+Extracts triadic frameworks from documents and tags with EM v2.0
+"""
+
+import sys
+import os
+import argparse
+import time
+from pathlib import Path
+
+# Add framework_extractor to path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from framework_extractor import (
+    DocumentParser,
+    PatternDetector,
+    FrameworkExtractor,
+    ConfidenceScorer,
+    FrameworkValidator,
+    ExtractionReporter
+)
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description='Extract triadic frameworks from documents with EM v2.0 tagging',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog='''
+Examples:
+  framework-extractor --source doc.docx
+  framework-extractor --source doc.docx --deep
+  framework-extractor --source folder/ --batch
+  framework-extractor --source folder/ --batch --deep --interactive
+  framework-extractor --source doc.docx --auto-threshold 0.9
+
+∰◊€π¿
+        '''
+    )
+
+    parser.add_argument('--source', required=True,
+                        help='Document or folder to process')
+    parser.add_argument('--output', default='staged/frameworks',
+                        help='Output directory (default: staged/frameworks/)')
+    parser.add_argument('--deep', action='store_true',
+                        help='Enable LLM deep analysis for implicit patterns')
+    parser.add_argument('--batch', action='store_true',
+                        help='Process all files in source folder')
+    parser.add_argument('--interactive', action='store_true',
+                        help='Prompt human for medium-confidence patterns')
+    parser.add_argument('--auto-threshold', type=float, default=0.8,
+                        help='Auto-extract patterns ≥ N confidence (default: 0.8)')
+    parser.add_argument('--show-low', action='store_true',
+                        help='Show patterns below threshold (normally skipped)')
+    parser.add_argument('--category',
+                        choices=['decision-space', 'reality-anchor', 'entity-signature'],
+                        help='Force category for extracted frameworks')
+
+    args = parser.parse_args()
+
+    # Resolve source path
+    source_path = Path(args.source).expanduser()
+
+    # Initialize components
+    doc_parser = DocumentParser()
+    pattern_detector = PatternDetector()
+    framework_extractor = FrameworkExtractor(output_dir=args.output)
+    reporter = ExtractionReporter()
+
+    # Determine files to process
+    if args.batch:
+        if not source_path.is_dir():
+            print(f"Error: --batch requires a directory, got: {source_path}")
+            sys.exit(1)
+        files_to_process = list_documents(source_path)
+    else:
+        if not source_path.is_file():
+            print(f"Error: File not found: {source_path}")
+            sys.exit(1)
+        files_to_process = [source_path]
+
+    print(f"Framework Extractor v1.0")
+    print(f"Processing {len(files_to_process)} file(s)...")
+    print()
+
+    # Start timer
+    start_time = time.time()
+
+    # Process each file
+    for file_path in files_to_process:
+        reporter.processed_files += 1
+        process_file(
+            file_path,
+            doc_parser,
+            pattern_detector,
+            framework_extractor,
+            reporter,
+            args
+        )
+
+    # End timer
+    duration = time.time() - start_time
+
+    # Generate and print report
+    report = reporter.generate_report(str(source_path), duration)
+    print()
+    print(report)
+
+
+def list_documents(directory: Path) -> list:
+    """List all supported documents in directory"""
+    supported_extensions = ['.docx', '.txt', '.md']
+    files = []
+
+    for ext in supported_extensions:
+        files.extend(directory.glob(f'**/*{ext}'))
+
+    return sorted(files)
+
+
+def process_file(file_path, doc_parser, pattern_detector, framework_extractor, reporter, args):
+    """Process a single file"""
+    try:
+        print(f"Processing: {file_path.name}...", end=' ')
+
+        # Parse document
+        document = doc_parser.parse(str(file_path))
+
+        # Detect patterns
+        patterns = pattern_detector.detect_patterns(document, deep_mode=args.deep)
+
+        if not patterns:
+            print("No patterns found")
+            reporter.add_no_pattern(str(file_path))
+            return
+
+        # Process each detected pattern
+        extracted_count = 0
+        flagged_count = 0
+
+        for pattern in patterns:
+            # Override category if specified
+            if args.category:
+                pattern.category = args.category
+
+            # Validate pattern
+            is_valid, errors = FrameworkValidator.validate(pattern)
+
+            if not is_valid:
+                print(f"\\n  ✗ Pattern '{pattern.name}' invalid: {', '.join(errors)}")
+                continue
+
+            # Calculate confidence
+            confidence = pattern.confidence
+
+            # Determine action based on confidence
+            if ConfidenceScorer.should_auto_extract(confidence, args.auto_threshold):
+                # Auto-extract
+                result = framework_extractor.extract_framework(
+                    pattern,
+                    str(file_path),
+                    confidence
+                )
+                reporter.add_extracted(result)
+                extracted_count += 1
+
+            elif ConfidenceScorer.should_prompt_human(confidence, 0.5, args.auto_threshold):
+                # Medium confidence - prompt if interactive
+                if args.interactive:
+                    if prompt_human(pattern, confidence):
+                        result = framework_extractor.extract_framework(
+                            pattern,
+                            str(file_path),
+                            confidence
+                        )
+                        reporter.add_extracted(result)
+                        extracted_count += 1
+                    else:
+                        reporter.add_flagged({'pattern': pattern, 'confidence': confidence})
+                        flagged_count += 1
+                else:
+                    # Flag for review
+                    reporter.add_flagged({'pattern': pattern, 'confidence': confidence})
+                    flagged_count += 1
+
+            else:
+                # Low confidence
+                if args.show_low:
+                    print(f"\\n  ○ Low confidence pattern: {pattern.name} ({confidence:.2f})")
+
+        # Summary for this file
+        if extracted_count > 0:
+            print(f"✓ Extracted {extracted_count}")
+        if flagged_count > 0:
+            print(f"? Flagged {flagged_count}")
+
+    except Exception as e:
+        print(f"✗ Failed: {str(e)}")
+        reporter.add_failed(str(file_path), str(e))
+
+
+def prompt_human(pattern, confidence):
+    """Prompt human to review medium-confidence pattern"""
+    print(f"\\n\\nPattern: {pattern.name}")
+    print(f"Confidence: {confidence:.2f} (Medium)")
+    print(f"Vector: {pattern.vector['title']}")
+    print(f"Anti-Vector: {pattern.anti_vector['title']}")
+    print(f"Prime: {pattern.prime['title']}")
+    print()
+
+    while True:
+        response = input("Extract this pattern? (y/n): ").lower()
+        if response in ['y', 'yes']:
+            return True
+        elif response in ['n', 'no']:
+            return False
+        else:
+            print("Please answer y or n")
+
+
+if __name__ == '__main__':
+    main()
