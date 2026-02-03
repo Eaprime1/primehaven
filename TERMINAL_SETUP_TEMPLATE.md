@@ -153,7 +153,11 @@ RESET='\[\033[00m\]'
 
 # Git branch in prompt
 parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+    local branch
+    branch=$(git symbolic-ref --short HEAD 2>/dev/null)
+    if [[ -n "$branch" ]]; then
+        echo " ($branch)" # Adds a space for better readability in the prompt
+    fi
 }
 
 # Custom prompt
