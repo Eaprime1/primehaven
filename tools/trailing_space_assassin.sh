@@ -111,6 +111,7 @@ find_trailing_spaces() {
     local count=0
     
     # Optimized find command - excludes common large directories
+    # PrimeHaven-specific: Exclude massive gravity content (primal/spaces)
     # Use maxdepth for faster scanning if repository is huge
     find "$REPO_ROOT" \
         -name '.git' -prune -o \
@@ -123,6 +124,10 @@ find_trailing_spaces() {
         -name '.tox' -prune -o \
         -name 'dist' -prune -o \
         -name 'build' -prune -o \
+        -name 'primal' -prune -o \
+        -name 'spaces' -prune -o \
+        -name 'BrowserOS' -prune -o \
+        -path '*/conduit/gemini/gemini-cli/*' -prune -o \
         -print0 2>/dev/null | while IFS= read -r -d '' item; do
         
         # Get just the basename
@@ -217,6 +222,7 @@ fix_all_issues() {
     local temp_file=$(mktemp)
     
     # Find all items with trailing spaces (deepest first to avoid parent/child conflicts)
+    # PrimeHaven-specific: Exclude massive gravity content (primal/spaces)
     find "$REPO_ROOT" -depth \
         -name '.git' -prune -o \
         -name '.trailing_space_backups' -prune -o \
@@ -228,6 +234,10 @@ fix_all_issues() {
         -name '.tox' -prune -o \
         -name 'dist' -prune -o \
         -name 'build' -prune -o \
+        -name 'primal' -prune -o \
+        -name 'spaces' -prune -o \
+        -name 'BrowserOS' -prune -o \
+        -path '*/conduit/gemini/gemini-cli/*' -prune -o \
         -print0 2>/dev/null | while IFS= read -r -d '' item; do
         
         local basename="${item##*/}"
