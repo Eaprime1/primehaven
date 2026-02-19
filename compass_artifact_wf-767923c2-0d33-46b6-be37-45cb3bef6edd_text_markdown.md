@@ -478,8 +478,7 @@ def load_visionary(path=None):
     """Load and parse the Visionary JSON, returning the full context dict."""
     filepath = Path(path) if path else DEFAULT_PATH
     if not filepath.exists():
-        print(f"ERROR: Visionary JSON not found at {filepath}", file=sys.stderr)
-        sys.exit(1)
+        raise FileNotFoundError(f"Visionary JSON not found at {filepath}")
     with open(filepath, "r", encoding="utf-8") as f:
         return json.load(f)
 
