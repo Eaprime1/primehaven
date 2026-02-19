@@ -624,7 +624,7 @@ jq -r '.entity_registry.entities[] | "    [\(.id | .[0:16] + " " * (16 - (.id | 
 echo "----------------------------------------------------------------"
 jq -r '.constitutional_bedrock.principles[] | "    \(.id). \(.name)"' "$VISIONARY_JSON"
 echo "================================================================"
-echo "  Environment loaded at $(date -Iseconds)"
+  echo "  Environment loaded at $(date +%Y-%m-%dT%H:%M:%S%z)"
 echo "  Source path: $UNEXUSI_JSON_PATH"
 echo ""
 ```
