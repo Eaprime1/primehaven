@@ -575,7 +575,7 @@ if __name__ == "__main__":
 #         ./visionary_loader.sh [path_to_json]  (prints summary only)
 # Requires: jq (brew install jq / apt install jq)
 
-set -euo pipefail
+set -uo pipefail
 
 VISIONARY_JSON="${1:-$(dirname "${BASH_SOURCE[0]}")/UNEXUSI_VISIONARY_SEED_v1.json}"
 
