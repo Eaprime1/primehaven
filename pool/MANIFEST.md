@@ -31,7 +31,7 @@
                +4 gap intersection analysis, neurodivergent navigation section,
                mandelbrot-at-the-boundary identity connection, and distinction table.
                Foundational document for }mandelbrot{ character entity.
-  PR/Commit:   claude/setup-primehaven-repo-apBBI (2026-05-21)
+  PR/Commit:   <replace-with-actual-PR-link-number-or-commit-SHA>
 ```
 
 ---
