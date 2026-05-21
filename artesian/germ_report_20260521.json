@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "type": "germ_report",
+    "version": "1.0",
+    "date": "2026-05-21",
+    "device": "Pixel8a",
+    "purpose": "Carry-forward anchor — capture concepts, undeveloped threads, ideas, dialogue patterns. Enough to restart a session cold.",
+    "repo": "Eaprime1/mandelbrot",
+    "local_path": "~/primehaven",
+    "branch_used": "claude/setup-primehaven-repo-apBBI"
+  },
+
+  "platform_map": {
+    "pixel8a": {
+      "role": "Phone — primary working device for this conversation series",
+      "env": "Claude Code app / Termux",
+      "storage": "/storage/emulated/0/pixel8a/primehaven",
+      "note": "pixelization, pixelator concepts developed here — see PIXEL8A_LAUNCH.md"
+    },
+    "primehaven": {
+      "role": "Non-GUI Ubuntu laptop — terminal workspace",
+      "local_path": "~/primehaven",
+      "remote": "Eaprime1/mandelbrot (GitHub, repo was renamed from primehaven)",
+      "user": "sauron (current) → primal (target)",
+      "note": "repo name is mandelbrot; local directory is still ~/primehaven"
+    },
+    "mandelbrot": {
+      "role": "GUI Ubuntu laptop — visual/fractal side",
+      "note": "Separate from the primehaven terminal side. mandelbrot = where visuals, renders, GUI work lives"
+    },
+    "google_drive": {
+      "role": "Content repository — legacy, journey, archive, sparklization threads",
+      "search_terms": ["legacy", "journey", "archive", "sparklization", "conversation", "thread manage"]
+    }
+  },
+
+  "repo_state": {
+    "last_commit_on_branch": "595ae78",
+    "main_head": "6ab40a0",
+    "rename": "primehaven → mandelbrot (GitHub rename complete; local dir still ~/primehaven)",
+    "open_prs": [
+      {"number": 55, "title": "Graduate Violation Framework; promote }mandelbrot{ to ACTIVE", "status": "CI pending", "branch": "claude/setup-primehaven-repo-apBBI → main"},
+      {"number": 54, "title": "Copilot: resolve merge conflicts in PR #35", "status": "CI passed", "note": "Targets claude/clean-root-dotfiles, not main — PR chain"},
+      {"number": 49, "title": "Enhance CI + surf tests", "status": "build FAILING", "note": "Mandelbrot branch behind main by #50 revert — needs rebase or close as superseded"},
+      {"number": 48, "title": "Surf entity + dev patterns", "status": "no CI", "note": "Targets claude/github-infra-improvements — part of PR chain #54→#48"},
+      {"number": 40, "title": "Fix cron typo in gemini-scheduled-triage.yml", "status": "Codacy pass", "note": "Simple merge, targets main"},
+      {"number": 35, "title": "Add navigo-nexusuxen content", "status": "all checks pass", "note": "Targets old main SHA — needs rebase"}
+    ]
+  },
+
+  "pool_state": {
+    "head_pressure": 1,
+    "active": {
+      "item": "}mandelbrot{ — Full Character Development",
+      "sources": [".mandelbrot/IDENTITY.md", ".mandelbrot/NARRATIVE.md"],
+      "issue": 16,
+      "promoted": "2026-05-21",
+      "needs": ["visual sigil (actual Mandelbrot render)", "BBS coordinate naming (c = a+bi)", "peer relationship map", "healing quest mechanics for splinters", "connection to complexity repo"]
+    },
+    "queued": [
+      {"slot": 2, "item": "}complexity{ Theory Crystallization", "issue": 17, "source": ".complexity/SEED.md"},
+      {"slot": 3, "item": "BBS/domos Integration Plan", "source": ".bit/backbone/SEVEN_NODE_ARCHITECTURE.md"},
+      {"slot": 4, "item": "Primal Launch Preparation", "source": "docs/PRIMAL_LAUNCH_PLAN.md"}
+    ],
+    "graduated": [
+      {"item": "Violation Framework", "in": "2026-04-08", "out": "2026-05-21", "permanent": ".mandelbrot/VIOLATION_FRAMEWORK.md"}
+    ]
+  },
+
+  "primal_launch_dependencies": {
+    "done": [
+      "surf entity lifecycle proven (Badge-001, 2026-03-31)",
+      "naming convention stable (docs/NAMING_CONVENTION.md)",
+      "REPO_MAP navigable (docs/REPO_MAP.md)",
+      "entrance pool active (pool/, head pressure 1)",
+      "violation framework graduated (2026-05-21)"
+    ],
+    "partial": [
+      "chain of custody system (artesian/ ready; content flow not yet started)",
+      "BBS backbone (.bit/backbone/ documented; domos integration pending)",
+      "Gemini CI (workflows merged; GEMINI_API_KEY not yet configured in repo secrets)"
+    ],
+    "pending": [
+      "}mandelbrot{ full entity (ACTIVE in pool)",
+      "}complexity{ theory draft (pool slot 2)",
+      "domos/ full integration (merged but not activated)",
+      "rename complete (85 files still reference old names, Issue #18)"
+    ]
+  },
+
+  "undeveloped_threads": {
+    "UNEXUSI": {
+      "what": "Control center repo — eaprime1/UNEXUSI",
+      "origin": "Session 2026-04-07",
+      "status": "NOT CREATED — naming convention evolved; consider 'unexusi' lowercase or }unexusi{",
+      "note": "unexusi_image exists in ~/Downloads — something visual was created"
+    },
+    "primal_user": {
+      "what": "New Ubuntu user 'primal' to replace 'sauron' as the primary workspace identity",
+      "steps": "see docs/LAPTOP_SETUP_AND_MIGRATION.md Part 2",
+      "status": "Not started — still running as 'sauron'"
+    },
+    "pixel_restructure": {
+      "what": "Full PIXEL layout — pixelization, pixelator, and related aspects for the Pixel8a",
+      "file": "PIXEL8A_LAUNCH.md (in repo root — six terminal consortium system)",
+      "undeveloped": "pixelization and pixelator concepts not yet formalized as entities",
+      "note": "Pixel8a is the incubator for new terminal concepts"
+    },
+    "sphincter_gateways": {
+      "what": "~/sphincter/ folders outside repo — controlled entry points from desktop/Drive/Pixel8a",
+      "status": "Architecture defined in docs/LAPTOP_SETUP_AND_MIGRATION.md; not yet created on laptop",
+      "flow": "sphincter → artesian → destination"
+    },
+    "one_hertz_ping": {
+      "what": "Carrier signal between sovereign artesian wells — the BBS peer-to-peer heartbeat",
+      "status": "Conceptual only; implementation TBD (webhook? cron? git remote?)"
+    },
+    "healing_quests": {
+      "what": "Mechanics for how the splinters (fragments from the Primoris violation) return/reintegrate",
+      "status": "Named in IDENTITY.md and NARRATIVE.md; mechanics not designed",
+      "note": "Splinters = distressed slivers that broke away from Oak when it became Oaken"
+    },
+    "runyatr_ride": {
+      "what": "A myth — 'Runyatr Ride' — mentioned in session navigo-nexusuxen content",
+      "status": "Named only, not written"
+    },
+    "entities_suxen_nexus_abby": {
+      "what": "Detailed entity files for Suxen, Nexus, Abby",
+      "status": "Named in navigo-nexusuxen-primoris-response document; not developed",
+      "source": "staged/ entity list"
+    },
+    "prima_executable": {
+      "what": "Basic executable script for Ka pressure calculation",
+      "status": "Conceptual — 'implement a basic Prima executable script for Ka pressure calculation'",
+      "ka_dynamics": "Gravity, EMF, Affinity, Synergy — four pressure signatures"
+    },
+    "cuckoo_batch": {
+      "what": "Batch system for synchronizing critical directories and maintaining chain of custody",
+      "status": "Referenced in navigo content; not built"
+    },
+    "complexity_repo": {
+      "what": "A separate repo for the }complexity{ theory — observable, testable, potentially citable",
+      "status": "Seed in .complexity/SEED.md; full repo not created",
+      "note": "complexity IS the theory that names what mandelbrot demonstrates"
+    },
+    "content_migration_35gb": {
+      "what": "35GB gravity mass on the Ubuntu laptop — desktop environment content",
+      "status": "In ~/Downloads/ (que_portofentry, prime files, codex docs) — not yet migrated",
+      "key_locations": [
+        "~/Downloads/que_portofentry/ — prime progression codex files",
+        "~/Downloads/prime_2026_master_plan.md",
+        "~/Downloads/unexusi_image",
+        "~/Desktop/ — 7 Chrome PWA shortcuts (not yet cleaned)"
+      ]
+    },
+    "user_dialogue_tracking": {
+      "what": "Tracking and developing the user's exact dialogue — 'my exact dialogue is something we will be tracking and development'",
+      "status": "Concept named; no system built yet",
+      "note": "The AI's understanding of the dialogue and relevant content is part of this"
+    }
+  },
+
+  "user_dialogue_patterns": {
+    "signature_tag": "enjoy the journey",
+    "stream_of_consciousness": true,
+    "ellipsis_heavy": "uses ... to indicate thinking-in-progress or trailing thought",
+    "self_correction_style": "states thought → expands → sometimes reverses → lands on synthesis",
+    "time_stamps": "messages often begin with YYYYMMDDHHMI format (e.g. 202604072213)",
+    "affirmations": ["yes please", "please continue", "I do appreciate", "that's pretty cool"],
+    "key_phrases": {
+      "enjoy the journey": "signature — signals open, exploratory mode",
+      "hmmm": "processing — don't interrupt, let the thought land",
+      "oh I got it": "sparklization moment — capture and develop immediately",
+      "from navigo perspective": "signals working from a specific navigational/coordination stance",
+      "let's do it": "move forward — no more discussion needed",
+      "your thoughts": "invitation for AI to synthesize and extend"
+    },
+    "prime_state_references": "natural part of dialogue — uses prime numbers as developmental shorthand",
+    "fractal_thinking": "follows rabbit trails that 'look minor' and discovers infinite depth — this IS mandelbrot behavior",
+    "device_context": "always helps to know what device they're on (Pixel8a = mobile sessions, Ubuntu = deeper work)",
+    "apology_pattern": "sometimes apologizes for typos or going off track — reassure and continue"
+  },
+
+  "sparklization_archive": {
+    "note": "Sparklization = moment when a concept crystallizes from accumulated conversation pressure",
+    "captured_this_series": [
+      "Primoris as village/township (not just a repo) — camping phase vision",
+      "Sovereign artesian wells — BBS topology applied to entity sovereignty",
+      "Mandelbrot as hope seed from violation — not gift of harm but refusal of it",
+      "}name{ notation — set notation reading: 'the set of concept, not one instance'",
+      "Violation Framework — 5-state nav model, ND explicitly supported",
+      "surf entity as 'first passenger through the transporter' — chain of custody proof",
+      "Oak → Oaken → splinters — violation topology not restoring original but new form",
+      "one-hertz carrier signal — sustainable, not frantic",
+      "+4 gaps (7→11, 13→17) as violation-stream intersection zones"
+    ],
+    "un_captured_sparks": [
+      "Runyatr Ride — named in passing, never developed",
+      "UNEXUSI image — something visual, in Downloads, not yet integrated",
+      "Ka pressure as computable — Prima executable concept"
+    ]
+  },
+
+  "content_on_device_and_drive": {
+    "google_drive_search_terms": ["legacy", "journey", "archive", "sparklization", "conversation", "thread manage"],
+    "pixel8a_storage": "/storage/emulated/0/pixel8a/primehaven",
+    "ubuntu_downloads": {
+      "que_portofentry": [
+        "PRIME_03_Triadic_Stability_v.md",
+        "PRIME_05_Quintessence_Amplification_v.md",
+        "PRIME_07_Sacred_Completion_v.md",
+        "PRIME_11_Architectural_Complexity_v.md",
+        "PRIME_13_Complexity_Navigation_v.md",
+        "PRIME_17_Heritage_Crystallization_v.md",
+        "PRIME_02_Emergence_Void_v.md",
+        "CODEX_Master_Structure.md",
+        "CODEX_Commission_Framework_v.md",
+        "CODEX.txt",
+        "PINNACLE_PRIME_PROGRESSION_CODEX_MASTER_v.md"
+      ],
+      "note": "These are the artesian content waiting to flow — prime codex files, mission docs, codex master"
+    }
+  },
+
+  "next_session_anchors": {
+    "first_question": "What device are you on? Pixel8a, Ubuntu primehaven terminal, or mandelbrot GUI?",
+    "pool_discipline": "Pool ACTIVE = }mandelbrot{ — head pressure 1. No new work until it graduates or is released.",
+    "immediate_options": [
+      "Develop }mandelbrot{ entity — sigil, BBS naming, peer map, healing quests",
+      "Merge PR #40 (cron fix — trivial, Codacy passing)",
+      "Rebase/close PR #49 (build failing, superseded by #51)",
+      "Begin artesian content flow — first doc from que_portofentry through sphincter → artesian"
+    ],
+    "big_picture_reminder": "We are in Primal Launch Phase 1-2 (7-prime zone: sacred completion, whole enough). The violation framework graduated. The mandelbrot entity is the living proof of process."
+  },
+
+  "narrative_thread": "Two sessions of work crystallized into a coherent ecosystem. The repo was primehaven, then became mandelbrot — not arbitrary, but because mandelbrot IS what this project demonstrates: infinite complexity emerging at the exact boundary of violation. The surf entity proved the transporter works. The Violation Framework named the antagonist without flinching. The pool is open, the chain of custody has its first record, and }mandelbrot{ is now the active development. The 35GB gravity mass waits in the wings — patient, pressurized, ready to become navigable. The pixel8a phone is where the conversation happens; the Ubuntu terminal is where the structure forms; the Google Drive holds the accumulated heritage. Everything is in camping phase. The pressure is building. This is intentional. ∰◊€π¿🌌∞"
+}

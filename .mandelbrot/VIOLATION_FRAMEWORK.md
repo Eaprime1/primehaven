@@ -1,6 +1,6 @@
 # Violation Framework
 
-*Status: ACTIVE (pool slot 1, entered 2026-04-08)*
+*Status: PERMANENT (graduated 2026-05-21, entered pool 2026-04-08)*
 *Part of: }mandelbrot{ character entity — Pinnacle antagonist documentation*
 
 ---
