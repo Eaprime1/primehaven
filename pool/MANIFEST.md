@@ -1,7 +1,7 @@
 # pool/MANIFEST.md — Chain of Custody Log
 
 *Documents that have passed through the entrance pool.*
-*Record starts 2026-04-08. Nothing has graduated yet — pool just opened.*
+*Record starts 2026-04-08. Graduations are tracked below.*
 
 ---
 
