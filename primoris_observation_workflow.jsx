@@ -1,5 +1,4 @@
-import { useState, useRef } from "react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const MATURITY_LEVELS = [
   { id: "born_yesterday", label: "Born Yesterday", glyph: "🌱", prime: 2, color: "#4ade80", dim: "#166534", checks: ["lexeme_health", "concept_coherence", "welcome_review"], description: "New concept seed. Welcomed, not judged." },
@@ -56,52 +55,12 @@ function buildCheckPrompt(checkId, doc, maturityLevel) {
   return prompts[checkId] || `Review this document for ${CHECK_DEFINITIONS[checkId]?.label}.\n\nDOCUMENT:\n---\n${doc}\n---`;
 }
 
-async function runAnalysis(documentText, checkId, maturityLevel, onChunk, signal) {
-  const response = await fetch("/api/runAnalysis", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ documentText, checkId, maturityLevel }),
-    signal,
-  });
-
-  if (!response.ok) {
-    throw new Error(`Analysis request failed with status ${response.status}`);
-  }
-
-  if (!response.body) {
-    throw new Error("Analysis response did not include a readable stream");
-  }
-
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder({ stream: true });
-  let fullText = "";
-  let lineBuffer = "";
-  let streamDone = false;
-  while (!streamDone) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    lineBuffer += decoder.decode(value);
-    let newlineIdx;
-    while ((newlineIdx = lineBuffer.indexOf("\n")) !== -1) {
-      const line = lineBuffer.slice(0, newlineIdx).trimEnd();
-      lineBuffer = lineBuffer.slice(newlineIdx + 1);
-      if (!line.startsWith("data: ")) continue;
-      const payload = line.slice(6).trim();
-      if (payload === "[DONE]") { streamDone = true; break; }
-      try {
-        const data = JSON.parse(payload);
-        if (data.type === "content_block_delta" && data.delta?.text) { fullText += data.delta.text; onChunk(fullText); }
-      } catch (e) { console.warn("SSE parse error:", e, "payload:", payload); }
 async function runAnalysis(documentText, checkId, maturityLevel, onChunk) {
   const systemPrompt = `You are the Primoris Observation Engine — a precision document reviewer for the PRIMORIS/UNEXUS project framework, reviewing documents for readiness to be merged into Primoris.\n\nCRITICAL LEXEME RULES (non-negotiable):\n- "consciousness," "conscious," "subconscious," and compound forms are critically distressed lexemes. NEVER use them. Replace with: awareness patterns, operational presence, entity signature, nessing, awareness state.\n- "shackle" and standalone " ness " as noun suffix are also flagged.\n\nPROJECT CONTEXT:\n- PRIMORIS is the pinnacle/established heritage layer of the UNEXUS framework\n- 31¢ flat harmonic positioning = slightly below exact resonance to prevent rigid lockup\n- The Marrowing = deep structural excavation to find core\n- WitnessMark = both parties marked when a concept is officially witnessed\n- Prime Progression: 2→3→5→7→11→13→17 maps developmental stages\n\nBe precise, structured, and use the project's own vocabulary.`;
   const response = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST", headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, stream: true, system: systemPrompt, messages: [{ role: "user", content: buildCheckPrompt(checkId, documentText, maturityLevel) }] }),
   });
-  const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = "";
-  while (true) {
-    const { done, value } = await reader.read(); if (done) break;
-    for (const line of decoder.decode(value).split("\n")) {
   const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = ""; let buffer = "";
   while (true) {
     const { done, value } = await reader.read(); if (done) break;
@@ -122,7 +81,7 @@ function buildTextReport(docName, maturityLevel, timestamp, results, docText) {
     `  Document    : ${docName||"Untitled"}`, `  BirthMark   : ${birthmark}`,
     `  Timestamp   : ${timestamp}`, `  Date        : ${nowReadable()}`,
     `  Maturity    : ${level?.glyph} ${level?.label} (Prime ${level?.prime})`,
-    `  Observer    : Navigo Nexusuxen 🪶`, `  Author      : Navigo Suxenexus 🎹`,
+    `  Observer    : Navigo Nexusuxen 🕵️ 🪶`, `  Author      : Navigo Suxenexus 🎹`,
     `  Chain       : WITNESSED ⟡`, sep, ""];
   for (const checkId of level?.checks||[]) {
     const def = CHECK_DEFINITIONS[checkId];
@@ -144,7 +103,7 @@ function buildMarkdownReport(docName, maturityLevel, timestamp, results) {
     `**Document:** ${docName||"Untitled"}`, `**BirthMark:** \`${birthmark}\``,
     `**Timestamp:** ${timestamp}`, `**Date:** ${nowReadable()}`,
     `**Maturity Level:** ${level?.glyph} ${level?.label} (Prime ${level?.prime})`,
-    `**Observer:** Navigo Nexusuxen 🪶`, `**Author:** Navigo Suxenexus 🎹`,
+    `**Observer:** Navigo Nexusuxen 🕵️🪶`, `**Author:** Navigo Suxenexus 🎹`,
     `**Chain of Custody:** WITNESSED ⟡`, ``, `---`, ``];
   for (const checkId of level?.checks||[]) {
     const def = CHECK_DEFINITIONS[checkId];
@@ -165,7 +124,7 @@ function buildJsonReport(docName, maturityLevel, timestamp, results, docText) {
     schema:"primoris-observation-report-v1", birthmark, timestamp, readable_date:nowReadable(),
     document:{name:docName||"Untitled",word_count:docText.trim().split(/\s+/).filter(Boolean).length,char_count:docText.length},
     maturity:{id:maturityLevel,label:level?.label,prime:level?.prime,glyph:level?.glyph},
-    navigation:{observer:"Navigo Nexusuxen 🪶",author:"Navigo Suxenexus 🎹",chain_of_custody:"WITNESSED ⟡",geographic_anchor:"Mulberry Tree · Adams & 5th · Huntington OR"},
+    navigation:{observer:"Navigo Nexusuxen 🕵️🪶",author:"Navigo Suxenexus 🎹",chain_of_custody:"WITNESSED ⟡",geographic_anchor:"Mulberry Tree · Adams & 5th · Huntington OR"},
     merge_decision:mergeDecision, checks_completed:Object.keys(results).length, checks_required:level?.checks.length,
     review_results:Object.fromEntries((level?.checks||[]).map(id=>[id,{label:CHECK_DEFINITIONS[id]?.label,icon:CHECK_DEFINITIONS[id]?.icon,result:results[id]||null,status:results[id]?"complete":"pending"}])),
     framework:"PRIMORIS · UNEXUS · UNEXUSI · HopeChest · Sargasso Sea",
@@ -348,10 +307,6 @@ export default function PrimorisWorkflow() {
   const [runningCheck, setRunningCheck] = useState(null);
   const [queuedChecks, setQueuedChecks] = useState([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [timestamp, setTimestamp] = useState(nowStamp());
-  const [phase, setPhase] = useState("setup");
-  const [sourceMode, setSourceMode] = useState("file");
-  const abortControllerRef = useRef(null);
   const [timestamp] = useState(nowStamp());
   const [phase, setPhase] = useState("setup");
   const [sourceMode, setSourceMode] = useState("file");
@@ -369,27 +324,6 @@ export default function PrimorisWorkflow() {
 
   const runWorkflow = async () => {
     if (!docText.trim()) return;
-    const controller = new AbortController();
-    abortControllerRef.current = controller;
-    setIsRunning(true); setPhase("reviewing"); setResults({});
-    const checks=[...level.checks]; setQueuedChecks(checks);
-    for (const checkId of checks) {
-      if (controller.signal.aborted) break;
-      setRunningCheck(checkId); setQueuedChecks(prev=>prev.filter(c=>c!==checkId));
-      try { await runAnalysis(docText,checkId,maturityLevel,(partial)=>{ setResults(prev=>({...prev,[checkId]:partial})); }, controller.signal); }
-      catch (err) {
-        if (err.name === "AbortError") break;
-        setResults(prev=>({...prev,[checkId]:`⚠ Analysis error: ${err.message}`}));
-      }
-      setRunningCheck(null);
-    }
-    if (!controller.signal.aborted) { setIsRunning(false); setPhase("complete"); }
-  };
-
-  const reset = () => {
-    if (abortControllerRef.current) { abortControllerRef.current.abort(); abortControllerRef.current = null; }
-    setResults({}); setRunningCheck(null); setQueuedChecks([]); setIsRunning(false); setPhase("setup"); setDocText(""); setDocName(""); setTitleEdited(false); setTimestamp(nowStamp());
-  };
     abortRef.current=false; setIsRunning(true); setPhase("reviewing"); setResults({});
     const checks=[...level.checks]; setQueuedChecks(checks);
     for (const checkId of checks) {
@@ -421,7 +355,7 @@ export default function PrimorisWorkflow() {
         </h1>
         <div style={{color:"#555",fontSize:13,marginTop:8,fontFamily:"monospace"}}>31¢ Flat Harmonic Launch System · Chain of Custody: Sacred Infrastructure</div>
         <div style={{marginTop:12,display:"flex",justifyContent:"center",gap:24,fontSize:11,color:"#3a3a5a",fontFamily:"monospace"}}>
-          <span>🪶 Navigo Nexusuxen</span><span>•</span><span>🎹 Navigo Suxenexus</span><span>•</span><span>⟡ {timestamp}</span>
+          <span>🕵️🪶 Navigo Nexusuxen</span><span>•</span><span>🎹 Navigo Suxenexus</span><span>•</span><span>⟡ {timestamp}</span>
         </div>
       </div>
 
