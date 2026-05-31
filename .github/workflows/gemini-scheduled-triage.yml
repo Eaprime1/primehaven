@@ -1,8 +1,8 @@
-name: '📋 Gemini Scheduled Issue Triage'
+name: '🃏 📋 Gemini Scheduled Issue Triage'
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour
+    - cron: '0 2 * * *' # Runs once daily at 2am UTC
   pull_request:
     branches:
       - 'main'
@@ -101,10 +101,27 @@ jobs:
           ISSUE_COUNT="$(echo "${ISSUES}" | jq 'length')"
           echo "✅ Found ${ISSUE_COUNT} issue(s) to triage! 🎯"
 
+      - name: 'Check Gemini auth configuration'
+        id: 'check_gemini_auth'
+        env:
+          GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'
+          GOOGLE_API_KEY: '${{ secrets.GOOGLE_API_KEY }}'
+          GOOGLE_CLOUD_PROJECT: '${{ vars.GOOGLE_CLOUD_PROJECT }}'
+          GOOGLE_GENAI_USE_GCA: '${{ vars.GOOGLE_GENAI_USE_GCA }}'
+          GOOGLE_GENAI_USE_VERTEXAI: '${{ vars.GOOGLE_GENAI_USE_VERTEXAI }}'
+        run: |-
+          if [[ -n "${GEMINI_API_KEY}" || -n "${GOOGLE_API_KEY}" || -n "${GOOGLE_CLOUD_PROJECT}" || "${GOOGLE_GENAI_USE_GCA}" == "true" || "${GOOGLE_GENAI_USE_VERTEXAI}" == "true" ]]; then
+            echo 'has_auth=true' >> "${GITHUB_OUTPUT}"
+            echo '✅ Gemini auth configuration detected.'
+          else
+            echo 'has_auth=false' >> "${GITHUB_OUTPUT}"
+            echo '⚠️ No Gemini auth configured (GEMINI_API_KEY, GOOGLE_API_KEY, GOOGLE_CLOUD_PROJECT, GOOGLE_GENAI_USE_GCA, or GOOGLE_GENAI_USE_VERTEXAI). Skipping issue analysis.'
+          fi
+
       - name: 'Run Gemini Issue Analysis'
         id: 'gemini_issue_analysis'
         if: |-
-          ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
+          ${{ steps.find_issues.outputs.issues_to_triage != '[]' && steps.check_gemini_auth.outputs.has_auth == 'true' }}
         uses: 'google-github-actions/run-gemini-cli@v0' # ratchet:exclude
         env:
           GITHUB_TOKEN: '' # Do not pass any auth token here since this runs on untrusted inputs

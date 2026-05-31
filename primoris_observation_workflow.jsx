@@ -1,3 +1,4 @@
+// 🃏
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const MATURITY_LEVELS = [
@@ -57,17 +58,30 @@ function buildCheckPrompt(checkId, doc, maturityLevel) {
 
 async function runAnalysis(documentText, checkId, maturityLevel, onChunk) {
   const systemPrompt = `You are the Primoris Observation Engine — a precision document reviewer for the PRIMORIS/UNEXUS project framework, reviewing documents for readiness to be merged into Primoris.\n\nCRITICAL LEXEME RULES (non-negotiable):\n- "consciousness," "conscious," "subconscious," and compound forms are critically distressed lexemes. NEVER use them. Replace with: awareness patterns, operational presence, entity signature, nessing, awareness state.\n- "shackle" and standalone " ness " as noun suffix are also flagged.\n\nPROJECT CONTEXT:\n- PRIMORIS is the pinnacle/established heritage layer of the UNEXUS framework\n- 31¢ flat harmonic positioning = slightly below exact resonance to prevent rigid lockup\n- The Marrowing = deep structural excavation to find core\n- WitnessMark = both parties marked when a concept is officially witnessed\n- Prime Progression: 2→3→5→7→11→13→17 maps developmental stages\n\nBe precise, structured, and use the project's own vocabulary.`;
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, stream: true, system: systemPrompt, messages: [{ role: "user", content: buildCheckPrompt(checkId, documentText, maturityLevel) }] }),
+  const response = await fetch("/api/runAnalysis", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      stream: true,
+      system: systemPrompt,
+      messages: [{ role: "user", content: buildCheckPrompt(checkId, documentText, maturityLevel) }],
+    }),
   });
+  if (!response.ok) {
+    throw new Error(`Analysis request failed with status ${response.status}`);
+  }
+  if (!response.body) {
+    throw new Error("Analysis response did not include a readable stream");
+  }
   const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = ""; let buffer = "";
   while (true) {
     const { done, value } = await reader.read(); if (done) break;
     buffer += decoder.decode(value, { stream: true });
     const lines = buffer.split("\n"); buffer = lines.pop() || "";
     for (const line of lines) {
-      if (line.startsWith("data: ")) { try { const data = JSON.parse(line.slice(6)); if (data.type === "content_block_delta" && data.delta?.text) { fullText += data.delta.text; onChunk(fullText); } } catch {} }
+      if (line.startsWith("data: ")) { try { const data = JSON.parse(line.slice(6)); if (data.type === "content_block_delta" && data.delta?.text) { fullText += data.delta.text; onChunk(fullText); } } catch (e) { console.error('Failed to parse SSE chunk:', line, e); } }
     }
   }
   return fullText;
@@ -133,13 +147,14 @@ function buildJsonReport(docName, maturityLevel, timestamp, results, docText) {
 
 function downloadFile(content, filename, mimeType) {
   const blob = new Blob([content],{type:mimeType}); const url=URL.createObjectURL(blob);
-  const a=document.createElement("a"); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url);
+  const a=document.createElement("a"); a.href=url; a.download=filename; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 function FileDropZone({ onFile, hasContent }) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef(null);
-  const readFile = (file, cb) => { const r=new FileReader(); r.onload=e=>cb(e.target.result,file.name); r.readAsText(file); };
+  const readFile = (file, cb) => { const r=new FileReader(); r.onload=e=>cb(e.target.result,file.name); r.onerror=e=>console.error(`File reading failed for ${file.name}:`, e); r.readAsText(file); };
   const handleDrop = (e) => { e.preventDefault(); setDragging(false); const f=e.dataTransfer.files[0]; if(f) readFile(f,onFile); };
   const handleChange = (e) => { const f=e.target.files[0]; if(f) readFile(f,onFile); e.target.value=""; };
   return (
