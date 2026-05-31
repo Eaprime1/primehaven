@@ -1,0 +1,4 @@
+---
+exclude_paths:
+  - "domos/primal/prime/.codex_archive_20260329/**"
+  - "primoris_observation_workflow.jsx"
