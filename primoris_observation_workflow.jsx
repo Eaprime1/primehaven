@@ -1,3 +1,4 @@
+// 🃏
 import { useState, useEffect, useRef, useCallback } from "react";
 
 const MATURITY_LEVELS = [
@@ -74,20 +75,12 @@ async function runAnalysis(documentText, checkId, maturityLevel, onChunk) {
   if (!response.body) {
     throw new Error("Analysis response did not include a readable stream");
   }
-  const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = "";
-  while (true) {
-    const { done, value } = await reader.read(); if (done) break;
-    for (const line of decoder.decode(value).split("\n")) {
   const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = ""; let buffer = "";
   while (true) {
     const { done, value } = await reader.read(); if (done) break;
     buffer += decoder.decode(value, { stream: true });
     const lines = buffer.split("\n"); buffer = lines.pop() || "";
     for (const line of lines) {
-  const reader = response.body.getReader(); const decoder = new TextDecoder(); let fullText = "";
-  while (true) {
-    const { done, value } = await reader.read(); if (done) break;
-    for (const line of decoder.decode(value).split("\n")) {
       if (line.startsWith("data: ")) { try { const data = JSON.parse(line.slice(6)); if (data.type === "content_block_delta" && data.delta?.text) { fullText += data.delta.text; onChunk(fullText); } } catch (e) { console.error('Failed to parse SSE chunk:', line, e); } }
     }
   }
