@@ -101,10 +101,25 @@ jobs:
           ISSUE_COUNT="$(echo "${ISSUES}" | jq 'length')"
           echo "✅ Found ${ISSUE_COUNT} issue(s) to triage! 🎯"
 
+      - name: 'Check Gemini auth configuration'
+        id: 'gemini_auth'
+        env:
+          GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'
+          GOOGLE_API_KEY: '${{ secrets.GOOGLE_API_KEY }}'
+          GOOGLE_GENAI_USE_VERTEXAI: '${{ vars.GOOGLE_GENAI_USE_VERTEXAI }}'
+          GOOGLE_GENAI_USE_GCA: '${{ vars.GOOGLE_GENAI_USE_GCA }}'
+        run: |-
+          if [[ -n "${GEMINI_API_KEY}" || -n "${GOOGLE_API_KEY}" || -n "${GOOGLE_GENAI_USE_VERTEXAI}" || -n "${GOOGLE_GENAI_USE_GCA}" ]]; then
+            echo 'auth_available=true' >> "${GITHUB_OUTPUT}"
+          else
+            echo 'auth_available=false' >> "${GITHUB_OUTPUT}"
+            echo '::warning::Skipping Gemini issue analysis because no Gemini auth method is configured.'
+          fi
+
       - name: 'Run Gemini Issue Analysis'
         id: 'gemini_issue_analysis'
         if: |-
-          ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
+          ${{ steps.find_issues.outputs.issues_to_triage != '[]' && steps.gemini_auth.outputs.auth_available == 'true' }}
         uses: 'google-github-actions/run-gemini-cli@f77273f4c914e4bf38440cf36a0369cb64a37489' # ratchet:google-github-actions/run-gemini-cli@v0.1.22
         env:
           GITHUB_TOKEN: '' # Do not pass any auth token here since this runs on untrusted inputs
