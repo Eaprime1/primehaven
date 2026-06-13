@@ -137,7 +137,6 @@ fi
 *Example Test Script:*
 ```bash
 #!/bin/bash
-#!/bin/bash
 set -euo pipefail
 
 ./spirit.sh --help | grep "Usage"
