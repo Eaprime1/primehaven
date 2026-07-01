@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const MATURITY_LEVELS = [
   { id: "born_yesterday", label: "Born Yesterday", glyph: "🌱", prime: 2, color: "#4ade80", dim: "#166534", checks: ["lexeme_health", "concept_coherence", "welcome_review"], description: "New concept seed. Welcomed, not judged." },
@@ -81,7 +81,7 @@ function buildTextReport(docName, maturityLevel, timestamp, results, docText) {
     `  Document    : ${docName||"Untitled"}`, `  BirthMark   : ${birthmark}`,
     `  Timestamp   : ${timestamp}`, `  Date        : ${nowReadable()}`,
     `  Maturity    : ${level?.glyph} ${level?.label} (Prime ${level?.prime})`,
-    `  Observer    : Navigo Nexusuxen 🪶`, `  Author      : Navigo Suxenexus 🎹`,
+    `  Observer    : Navigo Nexusuxen 🕵️ 🪶`, `  Author      : Navigo Suxenexus 🎹`,
     `  Chain       : WITNESSED ⟡`, sep, ""];
   for (const checkId of level?.checks||[]) {
     const def = CHECK_DEFINITIONS[checkId];
@@ -103,7 +103,7 @@ function buildMarkdownReport(docName, maturityLevel, timestamp, results) {
     `**Document:** ${docName||"Untitled"}`, `**BirthMark:** \`${birthmark}\``,
     `**Timestamp:** ${timestamp}`, `**Date:** ${nowReadable()}`,
     `**Maturity Level:** ${level?.glyph} ${level?.label} (Prime ${level?.prime})`,
-    `**Observer:** Navigo Nexusuxen 🪶`, `**Author:** Navigo Suxenexus 🎹`,
+    `**Observer:** Navigo Nexusuxen 🕵️🪶`, `**Author:** Navigo Suxenexus 🎹`,
     `**Chain of Custody:** WITNESSED ⟡`, ``, `---`, ``];
   for (const checkId of level?.checks||[]) {
     const def = CHECK_DEFINITIONS[checkId];
@@ -124,7 +124,7 @@ function buildJsonReport(docName, maturityLevel, timestamp, results, docText) {
     schema:"primoris-observation-report-v1", birthmark, timestamp, readable_date:nowReadable(),
     document:{name:docName||"Untitled",word_count:docText.trim().split(/\s+/).filter(Boolean).length,char_count:docText.length},
     maturity:{id:maturityLevel,label:level?.label,prime:level?.prime,glyph:level?.glyph},
-    navigation:{observer:"Navigo Nexusuxen 🪶",author:"Navigo Suxenexus 🎹",chain_of_custody:"WITNESSED ⟡",geographic_anchor:"Mulberry Tree · Adams & 5th · Huntington OR"},
+    navigation:{observer:"Navigo Nexusuxen 🕵️🪶",author:"Navigo Suxenexus 🎹",chain_of_custody:"WITNESSED ⟡",geographic_anchor:"Mulberry Tree · Adams & 5th · Huntington OR"},
     merge_decision:mergeDecision, checks_completed:Object.keys(results).length, checks_required:level?.checks.length,
     review_results:Object.fromEntries((level?.checks||[]).map(id=>[id,{label:CHECK_DEFINITIONS[id]?.label,icon:CHECK_DEFINITIONS[id]?.icon,result:results[id]||null,status:results[id]?"complete":"pending"}])),
     framework:"PRIMORIS · UNEXUS · UNEXUSI · HopeChest · Sargasso Sea",
@@ -355,7 +355,7 @@ export default function PrimorisWorkflow() {
         </h1>
         <div style={{color:"#555",fontSize:13,marginTop:8,fontFamily:"monospace"}}>31¢ Flat Harmonic Launch System · Chain of Custody: Sacred Infrastructure</div>
         <div style={{marginTop:12,display:"flex",justifyContent:"center",gap:24,fontSize:11,color:"#3a3a5a",fontFamily:"monospace"}}>
-          <span>🪶 Navigo Nexusuxen</span><span>•</span><span>🎹 Navigo Suxenexus</span><span>•</span><span>⟡ {timestamp}</span>
+          <span>🕵️🪶 Navigo Nexusuxen</span><span>•</span><span>🎹 Navigo Suxenexus</span><span>•</span><span>⟡ {timestamp}</span>
         </div>
       </div>
 
