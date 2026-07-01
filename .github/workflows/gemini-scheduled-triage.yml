@@ -103,9 +103,9 @@ jobs:
 
       - name: 'Check Gemini auth configuration'
         id: 'gemini_auth'
+        if: ${{ steps.find_issues.outputs.issues_to_triage != '[]' }}
         env:
           GEMINI_API_KEY: '${{ secrets.GEMINI_API_KEY }}'
-          GOOGLE_API_KEY: '${{ secrets.GOOGLE_API_KEY }}'
           GOOGLE_GENAI_USE_VERTEXAI: '${{ vars.GOOGLE_GENAI_USE_VERTEXAI }}'
           GOOGLE_GENAI_USE_GCA: '${{ vars.GOOGLE_GENAI_USE_GCA }}'
         run: |-
