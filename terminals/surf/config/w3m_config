@@ -1,0 +1,21 @@
+# W3m configuration for Surf browser entity
+
+# Cookies
+accept_cookie 1
+use_cookie 1
+cookie_file ~/.surf/sessions/w3m-cookies
+cookie_avoid_wrong_number_of_dots
+
+# Display
+tabstop 4
+indent_incr 4
+pixel_per_char 8
+pixel_per_line 16
+display_charset UTF-8
+document_charset UTF-8
+
+# Behavior
+confirm_qq 0
+auto_uncompress 1
+decode_url 0
+display_link_number 1

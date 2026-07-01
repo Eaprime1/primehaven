@@ -1,0 +1,8 @@
+# Migration Log - que_portofentry/
+**Started**: 2026-03-25
+**Destination**: ~/primehaven/domos/primal/prime/
+
+Files being reviewed and migrated systematically.
+See ~/primehaven/domos/primal/prime/incoming/MIGRATION_LOG.md for details.
+
+The gathering has begun. 🪷

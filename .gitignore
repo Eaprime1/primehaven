@@ -18,14 +18,20 @@ build/
 *.swo
 *~
 
-# OS
+# OS / home directory bleed
 .DS_Store
 Thumbs.db
+.gnome/
+.local/
+.pki/
+.config/
+.cache/
+.dbus/
+.kde/
 
 # Temporary files
 *.tmp
 *.log
-.cache/
 
 # Sensitive
 *.key
@@ -37,6 +43,13 @@ ghauth.txt
 *auth*.txt
 *token*.txt
 *secret*.txt
+agentk.txt
+*agentk*
+keys.env
+
+# Local environment (API keys live here, never commit)
+.bashrc
+.env.*
 
 # Node
 node_modules/
@@ -49,3 +62,9 @@ npm-debug.log
 # Claude local settings (keep only tracked config)
 .claude/settings.local.json
 .claude/projects/
+
+.gemini/
+gha-creds-*.json
+
+# Surf browser session data
+.surf/

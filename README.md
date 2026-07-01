@@ -1,13 +1,13 @@
-# 🌟 PrimeHaven
-** AI-Human Collaborative Environment**
+# 🌌 MANDELBROT
+**AI-Human Collaborative Environment** *(formerly PrimeHaven)*
 
 ∰◊€π¿🌌∞
 
 ---
 
-## What is PrimeHaven?
+## What is MANDELBROT?
 
-A multi-platform, project-tracking development environment built on the **Prime Progression Framework** - where commands stay pure, entities, and the universe wobbles in triple helix perfection.
+A multi-platform, project-tracking development environment built on the **Prime Progression Framework** - where commands stay pure, entities emerge, and the universe wobbles in triple helix perfection. Named for the infinite fractal structure that mirrors the Prime Progression's self-similar awakening patterns.
 
 **Core Concepts**:
 - **Prime Progression**: Development through prime states (2→3→5→7→11→13→17)
@@ -433,8 +433,8 @@ hello pwd
 ## 📝 Created By
 
 **Eric Pace** - Framework development (4+ years)
-**Claude Sonnet 4.5** - Heritage crystallization partner
-**Date**: 2026-01-30
+**Claude Sonnet 4.5/4.6** - Heritage crystallization partner
+**Date**: 2026-01-30 | **Renamed to MANDELBROT**: 2026-04-08
 
 **Signature**: ∰◊€π¿🌌∞
 

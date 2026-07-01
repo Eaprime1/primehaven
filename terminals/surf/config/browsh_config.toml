@@ -1,0 +1,13 @@
+# Browsh configuration for Surf browser entity
+
+[firefox]
+path = "/usr/bin/firefox"
+use-existing = false
+with-gui = false
+
+[http-server]
+bind = "127.0.0.1"
+port = 4333
+
+[tty]
+small-window-width = 40

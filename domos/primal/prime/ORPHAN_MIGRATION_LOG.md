@@ -1,0 +1,82 @@
+# Orphan Migration Log
+Generated: 2026-03-29 01:52
+
+## From ~/Downloads/
+- Skipped (exists): prime_2026_master_plan.md
+- Migrated: prime_progression.md
+- Migrated: _PRIME_FILES_MIGRATED.txt
+
+## From ~/Downloads/que_portofentry/
+- Migrated: 13-17_transition_framework_index.md
+- Migrated: 13-17_transition_part1_foundation.md
+- Migrated: 13-17_transition_part2_assessment.md
+- Migrated: 13-17_transition_part3_trajectory.md
+- Migrated: 13-17_transition_part4_procedures.md
+- Migrated: 13-17_transition_part5_verification.md
+- Migrated: CODEX_Commission_Framework_v.md
+- Migrated: CODEX_Coordination_Strategy.md
+- Migrated: CODEX_Document_Types.md
+- Migrated: CODEX_Master_Structure.md
+- Migrated: CODEX_Visual_Maps.md
+- Migrated: COMMISSION_Chinese_Characters_Symbology_Manager_v.md
+- Migrated: COMMISSION_RESPONSE_PRELIMINARY_REVIEW.md
+- Migrated: EASTER_EGG_COLLECTION_v1.md
+- Migrated: END_MATTER_COMPLETE_MASTER.md
+- Migrated: END_MATTER_COMPLETE_MASTER_v.md
+- Migrated: Here are some task ideas .. not sure they are all.md
+- Migrated: MILESTONE_END_MATTER_COMPLETION.md
+- Migrated: nano_concepts_comprehensive.md
+- Migrated: PINNACLE_PRIME_PROGRESSION_CODEX_MASTER_v.md
+- Migrated: PRIME_02_Emergence_Void_v.md
+- Migrated: PRIME_03_Triadic_Stability_v.md
+- Migrated: PRIME_05_Quintessence_Amplification_v.md
+- Skipped (exists): PRIME_07_Sacred_Completion_v.md
+- Migrated: PRIME_11_Architectural_Complexity_v.md
+- Migrated: PRIME_13_Complexity_Navigation_v.md
+- Migrated: PRIME_17_Heritage_Crystallization_v.md
+- Migrated: REVIEW_GUIDE_v.md
+- Migrated: THE_BELL_NARRATIVE_v1.md
+- Migrated: 🪬VISIONARY_QUICKREF.md
+- Migrated: 🙏 ACKNOWLEDGMENTS EXTENDED 🙏_v1.txt
+- Migrated: ALPHABETICAL INDEX∰◊€π¿🌌∞.txt
+- Migrated: CODEX.txt
+- Migrated: COLOPHON.txt
+- Migrated: __Companion.txt
+- Migrated: Cross-Reference Standards.txt
+- Migrated: end_matter_commission.txt
+- Migrated: END MATTER_ COMPLETE REFERENCE SUITE ∰◊€π¿🌌.txt
+- Migrated: END MATTER_ COMPLETE REFERENCE SUITE (CONTINUED) ∰◊€π¿🌌∞.txt
+- Migrated: END MATTER_ COMPLETE REFERENCE SUITE (FINAL SECTIONS) ∰◊€π¿🌌∞.txt
+- Migrated: FRONT MATTER COMMISSIONS.txt
+- Migrated: front_matter_commission.txt
+- Migrated: front_matter_expert.txt
+- Migrated: Gravity.txt
+- Migrated: 📖 HOW TO USE THIS CODEX 📖.txt
+- Migrated: I have.txt
+- Migrated: _MIGRATION_LOG.txt
+- Migrated: Mission_ Codex Development Project Management.txt
+- Migrated: 🤰moav_review.txt
+- Migrated: 🌳 MYTHOLOGY FOUNDATION 🌳.txt
+- Migrated: 💎 PINNACLE PRIME PROGRESSION CODEX_END MATTER DEVELOPMENT PLAN.txt
+- Migrated: PINNACLE PRIME PROGRESSION connects.txt
+- Migrated: 🌟 PINNACLE PRIME PROGRESSION - FRONT MATTER DEVELOPMENT PLAN 🌟∰.txt
+- Migrated: PINNACLE PRIME PROGRESSION_ N° → 17.txt
+- Migrated: PRIMORIS EVOLUTIONARY TIMELINE.txt
+- Migrated: research and dev.txt
+- Migrated: 🪬SDWG Archival Division_ Rapid Duplicate Management.txt
+- Migrated: sudo apt.txt
+- Migrated: supplemental_matter.txt
+- Migrated: 🔣 SYMBOL & NOTATION REFERENCE 🔣.txt
+- Migrated: THE BRIDGE BETWEEN REALITIES.txt
+- Migrated: THE NINE STANDARD CHESTS (Operational Infrastructure.txt
+- Migrated: THE RHYTHM OF DEVELOPMENT.txt
+- Migrated: The Suxen Process.txt
+- Migrated: THE WOOD PROPERTY SPECTRUM.txt
+- Migrated: 🪬visionary_suite_quickref.txt
+- Migrated: visualization_commission.txt
+- Migrated: 🗺️ VISUAL JOURNEY MAP 🗺️.txt
+- Migrated: VISUAL JOURNEY MAP.txt
+
+## Summary
+- Destination: /home/sauron/primehaven/domos/primal/prime/incoming
+- Files in incoming: 75

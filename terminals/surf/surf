@@ -1,0 +1,214 @@
+#!/bin/bash
+# surf - Terminal Web Navigator
+# Part of PrimeHaven UNEXUSIAM environment
+# Smart browser selection for TTY browsing
+
+set -euo pipefail
+
+SURF_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SURF_DIR/browser_selector.sh"
+
+# Colors
+CYAN='\033[0;36m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+DIM='\033[2m'
+RESET='\033[0m'
+
+# Default search/home
+DEFAULT_URL="https://duckduckgo.com"
+HISTORY_FILE="${HOME}/.surf_history"
+
+# Bookmarks (expandable)
+declare -A BOOKMARKS=(
+    ["ddg"]="https://duckduckgo.com"
+    ["gh"]="https://github.com"
+    ["github"]="https://github.com"
+    ["so"]="https://stackoverflow.com"
+    ["stackoverflow"]="https://stackoverflow.com"
+    ["hn"]="https://news.ycombinator.com"
+    ["hackernews"]="https://news.ycombinator.com"
+    ["wiki"]="https://en.wikipedia.org"
+    ["wikipedia"]="https://en.wikipedia.org"
+    ["arch"]="https://wiki.archlinux.org"
+    ["man"]="https://man.archlinux.org"
+)
+
+show_help() {
+    echo -e "${CYAN}surf${RESET} - Terminal Web Navigator"
+    echo ""
+    echo -e "${GREEN}Usage:${RESET}"
+    echo "  surf [url]              Open URL with smart browser selection"
+    echo "  surf -s <query>         Search DuckDuckGo"
+    echo "  surf -b <bookmark>      Open bookmark"
+    echo "  surf -l                 List bookmarks"
+    echo "  surf -m                 Interactive menu"
+    echo "  surf -h                 Show this help"
+    echo ""
+    echo -e "${GREEN}Browser Override:${RESET}"
+    echo "  surf <url> --lynx       Force lynx"
+    echo "  surf <url> --w3m        Force w3m"
+    echo "  surf <url> --browsh     Force browsh (JS support)"
+    echo ""
+    echo -e "${GREEN}Bookmarks:${RESET}"
+    for key in "${!BOOKMARKS[@]}"; do
+        echo -e "  ${YELLOW}$key${RESET} → ${BOOKMARKS[$key]}"
+    done
+}
+
+list_bookmarks() {
+    echo -e "${CYAN}Bookmarks:${RESET}"
+    for key in "${!BOOKMARKS[@]}"; do
+        echo -e "  ${YELLOW}$key${RESET} → ${BOOKMARKS[$key]}"
+    done
+}
+
+search_ddg() {
+    local query="$*"
+    local encoded=$(echo "$query" | sed 's/ /+/g')
+    echo "https://duckduckgo.com/?q=${encoded}"
+}
+
+save_history() {
+    local url="$1"
+    echo "$(date '+%Y-%m-%d %H:%M') $url" >> "$HISTORY_FILE"
+}
+
+# normalize_url - ensure URL has protocol, expand common domains
+# TODO: User contribution point - implement normalization logic
+normalize_url() {
+    local url="$1"
+
+    # Already has protocol? Return as-is
+    if [[ "$url" =~ ^(https?|file|ftp):// ]]; then
+        echo "$url"
+        return 0
+    fi
+
+    # Contains a dot? Likely a domain - add https://
+    if [[ "$url" == *"."* ]]; then
+        echo "https://$url"
+        return 0
+    fi
+
+    # Bare word without dot - return as-is (let bookmark lookup handle it)
+    echo "$url"
+}
+
+interactive_menu() {
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════╗${RESET}"
+    echo -e "${CYAN}║${RESET}        ${GREEN}surf${RESET} - Terminal Navigator       ${CYAN}║${RESET}"
+    echo -e "${CYAN}╠════════════════════════════════════════╣${RESET}"
+    echo -e "${CYAN}║${RESET}  [1] Enter URL                         ${CYAN}║${RESET}"
+    echo -e "${CYAN}║${RESET}  [2] Search (DuckDuckGo)               ${CYAN}║${RESET}"
+    echo -e "${CYAN}║${RESET}  [3] Bookmarks                         ${CYAN}║${RESET}"
+    echo -e "${CYAN}║${RESET}  [4] History (last 10)                 ${CYAN}║${RESET}"
+    echo -e "${CYAN}║${RESET}  [q] Quit                              ${CYAN}║${RESET}"
+    echo -e "${CYAN}╚════════════════════════════════════════╝${RESET}"
+    echo ""
+    echo -e "${DIM}Browsers: w3m (default) | lynx (docs) | browsh (JS)${RESET}"
+    echo ""
+    read -p "Choice: " choice
+
+    case "$choice" in
+        1)
+            read -p "URL: " url
+            launch_browser "$url"
+            ;;
+        2)
+            read -p "Search: " query
+            url=$(search_ddg "$query")
+            launch_browser "$url"
+            ;;
+        3)
+            echo ""
+            list_bookmarks
+            echo ""
+            read -p "Bookmark key: " key
+            if [[ -n "${BOOKMARKS[$key]:-}" ]]; then
+                launch_browser "${BOOKMARKS[$key]}"
+            else
+                echo "Unknown bookmark: $key"
+            fi
+            ;;
+        4)
+            if [[ -f "$HISTORY_FILE" ]]; then
+                echo ""
+                echo -e "${CYAN}Recent:${RESET}"
+                tail -10 "$HISTORY_FILE"
+                echo ""
+                read -p "Enter URL from history or press Enter to cancel: " url
+                [[ -n "$url" ]] && launch_browser "$url"
+            else
+                echo "No history yet."
+            fi
+            ;;
+        q|Q)
+            echo "Enjoy the journey."
+            exit 0
+            ;;
+        *)
+            echo "Unknown option"
+            ;;
+    esac
+}
+
+launch_browser() {
+    local url="$1"
+    local force="${2:-}"
+
+    # Expand bookmark if given
+    if [[ -n "${BOOKMARKS[$url]:-}" ]]; then
+        url="${BOOKMARKS[$url]}"
+    fi
+
+    # Normalize URL (add protocol if missing)
+    url=$(normalize_url "$url")
+
+    # Get smart browser selection
+    local browser=$(select_browser "$url" "$force")
+    local final=$(fallback_browser "$browser")
+
+    echo -e "${DIM}Opening with ${final}...${RESET}"
+    save_history "$url"
+
+    exec "$final" "$url"
+}
+
+# Main
+case "${1:-}" in
+    -h|--help)
+        show_help
+        ;;
+    -m|--menu)
+        interactive_menu
+        ;;
+    -l|--list)
+        list_bookmarks
+        ;;
+    -s|--search)
+        shift
+        url=$(search_ddg "$@")
+        launch_browser "$url"
+        ;;
+    -b|--bookmark)
+        key="${2:-}"
+        if [[ -n "${BOOKMARKS[$key]:-}" ]]; then
+            launch_browser "${BOOKMARKS[$key]}"
+        else
+            echo "Unknown bookmark: $key"
+            list_bookmarks
+            exit 1
+        fi
+        ;;
+    "")
+        interactive_menu
+        ;;
+    *)
+        # URL provided, check for force flag
+        url="$1"
+        force="${2:-}"
+        launch_browser "$url" "$force"
+        ;;
+esac

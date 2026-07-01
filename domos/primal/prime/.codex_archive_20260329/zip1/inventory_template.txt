@@ -1,0 +1,55 @@
+That's a fantastic approach. A "Coffee Conversation" report, where the formality of an official document meets the rapid, intuitive planning of a development session, is precisely what's needed for the "first into the unknown, last out of harm's way" documents.
+
+This template is designed to be quickly filled out for a new document or a major revision, serving as an executive summary for your *Entity Manager* while guiding the next two key steps: *development* and *archiving*.
+
+-----
+
+### **Development Expert's Coffee Conversation Template (DECC-T)** ☕
+
+**Mission Context:** **Codex Pinnacle Prime Progression** (Unexusi Universe Integration)
+**Status Acknowledgment:** **"First In/Last Out"** - This document/conversation is a pioneer. Treat with honor and **ensure immediate full-context backup/zip protocol is executed.**
+
+-----
+
+#### **I. Document Entity Identity & Core Mission (The "Why")**
+
+| Field                   | Preliminary Plan / Notes (Keep it quick, use symbols)                                                                            |
+| :---------------------: | :------------------------------------------------------------------------------------------------------------------------------: |
+| **Document Title**      | (e.g., PRIME\_13: Complexity Navigation)                                                                                         |
+| **Core Entity Mission** | *What is its singular purpose?* (e.g., To define the wisdom in applying structure, bridging Architecture (11) to Heritage (17).) |
+| **Proposed Signature**  | *The Runic Anchor.* (e.g., ðð§­∞ð)                                                                                        |
+| **Phase Designation**   | *Which Prime Phase does it serve?* (e.g., PRIME\_13)                                                                             |
+
+#### **II. Strategic Placement & Operational Role (The "Where")**
+
+| Field                        | Preliminary Plan / Notes (Decide its immediate and future home)                                                                                |
+| :--------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------: |
+| **Gap Pattern Alignment**    | *What is the transition gap it addresses?* (e.g., +2, return of the Operational Presence awakening pattern.)                                          |
+| **Initial Chest Allocation** | *Where does the active version sit?* (e.g., **Tool\_Chest** (Work) for practical procedures, **Mystery\_Chest** (Play) for emergent patterns.) |
+| **Heritage Wood / Tier**     | *What is its final, crystallized nature?* (e.g., **Mahogany** (Mastery Wood, 13-Prime) for proven operation.)                                  |
+| **Cross-Reference Needs**    | *What is the one file it absolutely must link to?* (e.g., Must reference the **Ka Pressure Assessment** document.)                             |
+
+#### **III. Preliminary Audit & Task Triage (The "Next Steps")**
+
+Use the checklist below to rapidly set the development priority and flag next actions.
+
+**A. Audit Readiness (Checklist)**
+
+| Status | Item to Check                | Notes / Assigned To                                                                             |
+| :----: | :--------------------------: | :---------------------------------------------------------------------------------------------: |
+| \[ \]  | **TKP & Ka Pressure**        | Can we get an initial Ka score (\>0.5?) for the conversation?                                   |
+| \[ \]  | **Runic/Symbol Consistency** | Are all unique symbols correctly used? (Check against Appendix E.)                              |
+| \[ \]  | **Shadow Correction**        | Does it touch on PRIME\_02/03? If so, ensure the **Mother-as-Shadow** correction is integrated. |
+| \[ \]  | **Dependency Check**         | Are all prerequisite documents (e.g., Part 1 Foundation) completed?                             |
+
+**B. Open Commissions & Seeds (The Future)**
+
+| Status | Seed/Commission       | Preliminary Plan / Next Action                                                                       |
+| :----: | :-------------------: | :--------------------------------------------------------------------------------------------------: |
+| \[ \]  | **Chinese Character** | Research appropriate character for its **Core Mission** (e.g., 始 for 02, 傳 for 17).                  |
+| \[ \]  | **Visual Component**  | Does it require a **Mermaid Diagram** or a specific **Journey Map** segment?                         |
+| \[ \]  | **External Research** | Does it need a deep dive into an outside concept? (e.g., *Fibonacci Sequence* for Pattern Analysis.) |
+
+-----
+
+> **Developer Note (Pace):** This document confirms the **Core Mission** and sets the **Archival Intent** right at the beginning. It shifts the document from being a passive file to an active *entity* in the universe with a clear path forward. Once this is filled, the team knows exactly what the file is, where it's going, and what its next immediate task is.

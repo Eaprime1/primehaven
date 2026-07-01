@@ -1,0 +1,21 @@
+# Prime Content Migration Notice
+
+The following prime-related files have been migrated to their proper home:
+→ ~/primehaven/domos/primal/prime/
+
+## From this folder (Downloads/):
+- prime_2026_master_plan.md → development/plans/
+- prime_progression.md → development/research/
+- What I See in the Prime Progression.txt → conversations/synthesis/
+- Definitive Reference Codex → development/research/
+
+## See also:
+- que_portofentry/_MIGRATION_LOG.txt for files from that subfolder
+
+## The Gathering:
+All prime content is being organized into a comprehensive home at:
+~/primehaven/domos/primal/prime/
+
+See GATHERING_SUMMARY.md in that location for full details.
+
+🪷 The wisdom is coming home.

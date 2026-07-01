@@ -1,0 +1,546 @@
+# Instincts generated from https://github.com/Eaprime1/MANDELBROT
+# Generated: 2026-04-08T22:28:34.123Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: MANDELBROT-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: feat, docs, chore, test, fix
+
+## Evidence
+
+- 22 commits analyzed
+- Detected conventional commit pattern
+- Examples: docs: add surf browser entity design spec, chore: create surf browser entity directory structure
+
+---
+id: MANDELBROT-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Commit Length
+
+## Action
+
+Keep commit messages concise (~43 characters)
+
+## Evidence
+
+- Average commit message length: 43 chars
+- Based on 22 commits
+
+---
+id: MANDELBROT-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Naming Files
+
+## Action
+
+Use snake_case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: snake_case
+
+---
+id: MANDELBROT-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: MANDELBROT-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: MANDELBROT-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: MANDELBROT-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~20x per month
+- Files: **/*.test.*
+
+---
+id: MANDELBROT-workflow-entity-feature-development-workflow
+trigger: "when doing entity feature development workflow"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Workflow Entity Feature Development Workflow
+
+## Action
+
+Follow the entity-feature-development-workflow workflow:
+1. Create a design/spec file in docs/superpowers/specs/ or docs/plans/
+2. Write an implementation plan in docs/superpowers/plans/ or docs/plans/
+3. Create directory structure for the entity under terminals/entities/<entity-name>/ and/or terminals/<entity-name>/
+4. Add core code modules (e.g., browser_selector.sh, session_manager.sh, spirit.sh, entity_wrapper.sh) in the entity directory
+5. Add configuration files under terminals/<entity-name>/config/
+6. Add seed/minimal entities under terminals/entities/<entity-name>-simple/ or similar
+7. Add README and INSTALL docs in the entity directory
+8. Integrate the entity into master_ui.sh or other launcher scripts
+9. Add test suite scripts (e.g., test_<entity>.sh)
+10. Mark implementation complete with a status file (e.g., STATUS.md) and update the spec with completion status
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: docs/superpowers/specs/*.md, docs/superpowers/plans/*.md, docs/plans/*.md
+
+---
+id: MANDELBROT-workflow-documentation-driven-planning-workflow
+trigger: "when doing documentation driven planning workflow"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Workflow Documentation Driven Planning Workflow
+
+## Action
+
+Follow the documentation-driven-planning-workflow workflow:
+1. Create or update a design/spec document in docs/superpowers/specs/ or docs/plans/
+2. Create or update an implementation plan in docs/superpowers/plans/ or docs/plans/
+3. Reference these documents in subsequent commits for implementation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: docs/superpowers/specs/*.md, docs/superpowers/plans/*.md, docs/plans/*.md
+
+---
+id: MANDELBROT-workflow-entity-integration-into-master-ui-workflow
+trigger: "when doing entity integration into master ui workflow"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Workflow Entity Integration Into Master Ui Workflow
+
+## Action
+
+Follow the entity-integration-into-master-ui-workflow workflow:
+1. Update tools/master_ui.sh to add a new menu option for the entity/tool
+2. Add error handling or checks for the new entity's presence
+3. Document the integration in the entity's README or INSTALL guide
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: tools/master_ui.sh, terminals/<entity>/README.md, terminals/<entity>/INSTALL.md
+
+---
+id: MANDELBROT-workflow-test-suite-addition-for-entity-workflow
+trigger: "when doing test suite addition for entity workflow"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/Eaprime1/MANDELBROT
+---
+
+# MANDELBROT Workflow Test Suite Addition For Entity Workflow
+
+## Action
+
+Follow the test-suite-addition-for-entity-workflow workflow:
+1. Create a test script (e.g., test_<entity>.sh) in the entity's directory
+2. Include tests for core logic, flags, session management, and help output
+3. Reference the test suite in the entity's README or STATUS
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: terminals/<entity>/test_*.sh, terminals/<entity>/README.md, terminals/<entity>/STATUS.md
+
+---
+id: mandelbrot-instinct-file-naming
+trigger: "When creating or renaming files in the repository"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct File Naming
+
+## Action
+
+Use snake_case for file names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.files
+- Observed in files like test_surf_browser_entity.sh
+
+---
+id: mandelbrot-instinct-function-naming
+trigger: "When defining functions in Python code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Function Naming
+
+## Action
+
+Use camelCase for function names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.functions
+
+---
+id: mandelbrot-instinct-class-naming
+trigger: "When defining classes in Python code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Class Naming
+
+## Action
+
+Use PascalCase for class names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.classes
+
+---
+id: mandelbrot-instinct-constant-naming
+trigger: "When defining constants in Python code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constants
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.constants
+
+---
+id: mandelbrot-instinct-import-style
+trigger: "When importing modules in Python code"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Import Style
+
+## Action
+
+Use relative imports
+
+## Evidence
+
+- Pattern in codeStyle.importStyle
+
+---
+id: mandelbrot-instinct-export-style
+trigger: "When exporting modules or functions"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle
+
+---
+id: mandelbrot-instinct-test-script-location
+trigger: "When adding test scripts for an entity"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Test Script Location
+
+## Action
+
+Place test scripts as test_*.sh files in the corresponding terminals/<entity>/ directory
+
+## Evidence
+
+- Pattern in workflows.test-suite-addition-for-entity-workflow.filesInvolved
+- Seen in files like terminals/surf/test_surf.sh
+
+---
+id: mandelbrot-instinct-test-script-content
+trigger: "When writing a test script for an entity"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Test Script Content
+
+## Action
+
+Include tests for core logic, flags, session management, and help output
+
+## Evidence
+
+- Pattern in workflows.test-suite-addition-for-entity-workflow.steps
+
+---
+id: mandelbrot-instinct-test-suite-reference
+trigger: "When adding a test suite for an entity"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Test Suite Reference
+
+## Action
+
+Reference the test suite in the entity's README.md or STATUS.md
+
+## Evidence
+
+- Pattern in workflows.test-suite-addition-for-entity-workflow.steps
+
+---
+id: mandelbrot-instinct-git-commit-format
+trigger: "When making a git commit"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Git Commit Format
+
+## Action
+
+Use conventional commit prefixes (feat, docs, chore, test, fix) followed by a colon and a brief description
+
+## Evidence
+
+- Pattern in commits.prefixes
+- Examples: 'docs: add surf browser entity design spec'
+
+---
+id: mandelbrot-instinct-git-commit-length
+trigger: "When writing a commit message"
+confidence: 0.7
+domain: git
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Git Commit Length
+
+## Action
+
+Keep the commit message around 43 characters on average
+
+## Evidence
+
+- Pattern in commits.averageLength
+
+---
+id: mandelbrot-instinct-entity-feature-development
+trigger: "When adding a new terminal entity (browser, tool, or service)"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Entity Feature Development
+
+## Action
+
+Follow the entity-feature-development-workflow: design/spec → implementation plan → code modules → integration → docs/tests
+
+## Evidence
+
+- Workflow: entity-feature-development-workflow
+- Seen in commit sequences and file patterns for new entities
+
+---
+id: mandelbrot-instinct-documentation-driven-planning
+trigger: "When proposing, planning, or designing a new feature or system"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Documentation Driven Planning
+
+## Action
+
+Create or update design/spec and implementation plan documents before code changes
+
+## Evidence
+
+- Workflow: documentation-driven-planning-workflow
+- Pattern in docs/superpowers/specs/*.md and docs/superpowers/plans/*.md
+
+---
+id: mandelbrot-instinct-entity-integration-into-master-ui
+trigger: "When making a new entity/tool available from the main user interface"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Entity Integration Into Master Ui
+
+## Action
+
+Update tools/master_ui.sh to add the entity, add error handling, and document integration in README or INSTALL
+
+## Evidence
+
+- Workflow: entity-integration-into-master-ui-workflow
+- Pattern in tools/master_ui.sh and entity docs
+
+---
+id: mandelbrot-instinct-test-suite-addition-for-entity
+trigger: "When ensuring a new entity/tool is tested and validated"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: Eaprime1/MANDELBROT
+---
+
+# Mandelbrot Instinct Test Suite Addition For Entity
+
+## Action
+
+Add a test script (test_<entity>.sh), include core logic and help output tests, and reference in README or STATUS
+
+## Evidence
+
+- Workflow: test-suite-addition-for-entity-workflow
+- Pattern in terminals/<entity>/test_*.sh
+

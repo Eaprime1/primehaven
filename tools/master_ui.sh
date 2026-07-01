@@ -607,6 +607,7 @@ MAIN MENU OPTIONS:
     s - Sync Check      : Check Google Drive, GitHub, network status
     l - Launch          : Quick launch browser, apps, platforms
     q - Quick Actions   : Common tasks (git pull all, reports, etc.)
+    w - Web Navigator   : Surf terminal browser (lynx/w3m/browsh)
     h - Help            : Show this help
     x - Exit            : Quit Master UI
 
@@ -655,6 +656,7 @@ main_menu() {
         echo "  ${CYAN}s${NORMAL}. Sync Check      - Google Drive, GitHub, network"
         echo "  ${CYAN}l${NORMAL}. Launch          - Browser, apps, platforms"
         echo "  ${CYAN}q${NORMAL}. Quick Actions   - Git pull all, reports, cleanup"
+        echo "  ${CYAN}w${NORMAL}. Web Navigator   - Surf terminal browser"
         echo "  ${CYAN}h${NORMAL}. Help            - Show help and documentation"
         echo "  ${CYAN}x${NORMAL}. Exit            - Quit Master UI"
         echo ""
@@ -670,6 +672,19 @@ main_menu() {
             s) quick_sync_check ;;
             l) launch_tools ;;
             q) show_quick_actions ;;
+            w)
+                clear_screen
+                draw_box_header "WEB NAVIGATOR - SURF" 80
+                echo ""
+                if [[ -x "${PRIMEHAVEN_ROOT}/terminals/surf/entity_wrapper.sh" ]]; then
+                    "${PRIMEHAVEN_ROOT}/terminals/surf/entity_wrapper.sh"
+                else
+                    status_indicator "error" "Surf not found at ${PRIMEHAVEN_ROOT}/terminals/surf/"
+                    echo ""
+                    echo "Install surf with: cd ~/primehaven && git pull"
+                    pause
+                fi
+                ;;
             h) show_help ;;
             x)
                 clear_screen

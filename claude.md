@@ -1,7 +1,7 @@
-# Claude Notes - }primehaven{ Project
+# Claude Notes - }MANDELBROT{ Project *(formerly primehaven)*
 
-**Last Updated**: 2026-03-25
-**Location**: `~/primehaven`
+**Last Updated**: 2026-04-08
+**Location**: `~/primehaven` (local) | GitHub: `Eaprime1/MANDELBROT`
 **Platform**: Ubuntu laptop (terminal-focused workspace)
 
 ---

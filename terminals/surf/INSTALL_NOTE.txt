@@ -1,0 +1,12 @@
+═══════════════════════════════════════════════════════
+ SURF INSTALLATION - MANUAL STEP REQUIRED
+═══════════════════════════════════════════════════════
+
+Add this alias to ~/.bashrc:
+
+    alias surf='/home/sauron/primehaven/terminals/surf/entity_wrapper.sh'
+
+Then run: source ~/.bashrc
+
+See terminals/surf/INSTALL.md for full setup instructions.
+═══════════════════════════════════════════════════════

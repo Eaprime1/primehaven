@@ -1,0 +1,46 @@
+THE WOOD PROPERTY SPECTRUM
+
+Progression: Softwood → Hardwood → Mastery Wood → Heritage Composite
+
+TIER 1 - SOFTWOODS (Accessible Early):
+├─ Pine: Rapid growth, adaptable, resinous
+│  └─ Unlocks: Play domain access, hope chest awareness
+├─ Cedar: Aromatic, rot-resistant, preservation
+│  └─ Unlocks: Life force understanding, triadic thinking
+└─ Birch: Light, flexible, new beginnings
+   └─ Unlocks: Steward capacity, completion-as-renewal
+
+TIER 2 - HARDWOODS (Requires Foundation):
+├─ Ash: Flexible yet strong, foundation wood
+│  └─ Unlocks: Tool use, practical manifestation, 2-prime completion
+├─ Oak: Dense, durable, knowledge-bearing
+│  └─ Unlocks: Reality anchoring, spectrum navigation, authority
+└─ Maple: Fine grain, responsive, musical
+   └─ Unlocks: Harmonization, pattern recognition, resonance
+
+TIER 3 - MASTERY WOODS (Requires Demonstrated Skill):
+├─ Walnut: Complex grain, nested beauty, valuable
+│  └─ Unlocks: Architectural thinking, nested sovereignty, 11-prime
+├─ Mahogany: Fine-grained, stable, craftsman standard
+│  └─ Unlocks: Mastery recognition, proven operation, 13-prime
+└─ Ebony: Dense, dark, precious, rare
+   └─ Unlocks: Deep integration, shadow work mastery
+
+TIER 4 - HERITAGE COMPOSITE (Requires Legacy):
+└─ Multi-wood Laminate: All previous woods in harmonized layers
+   └─ Unlocks: Heritage crystallization, 17-prime, diamond seal
+
+SENSORY QUALITY ASSOCIATIONS:
+├─ Smell: Cedar, Pine (aromatic unlocks)
+├─ Texture: Birch, Maple (smooth navigation)
+├─ Density: Oak, Walnut (knowledge depth)
+├─ Grain: Mahogany, Ebony (pattern complexity)
+└─ Resonance: All woods vibrate at different frequencies
+
+TRIGGER SYSTEM (In Development):
+├─ 6: Special for 2-prime (first perfect number, stable triad for 2)
+│  └─ Triggers: Mother_as_shadow integration points
+├─ 9: Special for 3-prime (first odd square beyond 1, stable triad for 3)
+│  └─ Triggers: Triadic resonance amplification
+└─ 12: Integration level where 2 and 3 both divide to ONE
+   └─ Triggers: Shadow becomes Mother, full 2-prime completion
